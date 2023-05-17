@@ -1,5 +1,5 @@
 const fetchCategory = async () => {
-  const apiRes = await fetch(`http://planted.duckdns.org:8080/categories`, {
+  const apiRes = await fetch(process.env.SERVER_URL + `/categories`, {
     method: "GET",
     credentials: "include",
     headers: {

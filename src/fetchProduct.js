@@ -2,7 +2,7 @@ const fetchProduct = async ({ queryKey }) => {
   const selection = queryKey[1];
 
   const apiRes = await fetch(
-    `http://planted.duckdns.org:8080/products/${selection}`,
+    process.env.SERVER_URL + `/products/${selection}`,
     {
       method: "GET",
       credentials: "include",

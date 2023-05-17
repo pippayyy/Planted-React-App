@@ -1,6 +1,6 @@
 const addOrder = function (prodId, refetch, addToOrderDetails) {
   //create row in orders table using customer id
-  fetch("http://planted.duckdns.org:8080/order/create", {
+  fetch(process.env.SERVER_URL + "/order/create", {
     method: "POST",
     credentials: "include",
   })

@@ -1,7 +1,8 @@
 const updateStock = function (prodId, qtyToUpdate = -1, refetch) {
   //create row in order details table using order id and product id
   fetch(
-    "http://planted.duckdns.org:8080/update/stock/product/" +
+    process.env.SERVER_URL +
+      "/update/stock/product/" +
       prodId +
       "/productqty/" +
       qtyToUpdate,
