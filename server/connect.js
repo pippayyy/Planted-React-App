@@ -2,10 +2,10 @@ import mysql from "mysql2/promise";
 
 export const connection = await mysql
   .createConnection({
-    host: "127.0.0.1",
-    user: "root",
-    password: "aloeVera123!",
-    database: "pip_test",
+    host: process.env.DB_HOST,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASS,
+    database: process.env.DB_NAME,
     port: "3306",
   })
   .then((conn) => {
