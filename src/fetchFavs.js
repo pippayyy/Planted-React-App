@@ -1,5 +1,5 @@
 async function fetchFavs() {
-  const res = await fetch(`http://planted.duckdns.org:8080/favourties`, {
+  const res = await fetch(process.env.SERVER_URL + `/favourties`, {
     method: "GET",
     credentials: "include",
     headers: {
