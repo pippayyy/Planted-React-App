@@ -19,7 +19,7 @@ import {
   QuestionCircle,
   Gear,
 } from "react-bootstrap-icons";
-import PlantedIcon from "./images/icon_planted.png";
+import PlantedIcon from "./public/images/icon_planted.png";
 
 const NavbarMobile = () => {
   // Collapse isOpen State
