@@ -1,5 +1,5 @@
 async function fetchFavs() {
-  const res = await fetch(process.env.SERVER_URL + `/favourties`, {
+  const res = await fetch(`https://plantedserver.onrender.com/favourties`, {
     method: "GET",
     credentials: "include",
     headers: {

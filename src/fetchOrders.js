@@ -1,5 +1,5 @@
 async function fetchOrders() {
-  const res = await fetch(`http://planted.duckdns.org:8080/getorders`, {
+  const res = await fetch(`https://plantedserver.onrender.com/getorders`, {
     method: "GET",
     credentials: "include",
     headers: {

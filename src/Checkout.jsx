@@ -171,7 +171,7 @@ const Checkout = () => {
 
   //function to place order
   function placeOrder(orderObject) {
-    fetch("http://planted.duckdns.org:8080/order/placeorder", {
+    fetch("https://plantedserver.onrender.com/order/placeorder", {
       method: "POST",
       credentials: "include",
       data: orderObject,

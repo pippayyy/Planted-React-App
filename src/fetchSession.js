@@ -1,5 +1,5 @@
 async function fetchSession() {
-  const res = await fetch(process.env.SERVER_URL + `/checksession`, {
+  const res = await fetch(`https://plantedserver.onrender.com/checksession`, {
     method: "GET",
     credentials: "include",
     headers: {

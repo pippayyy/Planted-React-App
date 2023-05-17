@@ -2,7 +2,7 @@ async function fetchOrderDetails({ queryKey }) {
   const { orderId } = queryKey[1];
 
   const res = await fetch(
-    `http://planted.duckdns.org:8080/getorders/orderid/${orderId}`,
+    `https://plantedserver.onrender.com/getorders/orderid/${orderId}`,
     {
       method: "GET",
       credentials: "include",

@@ -1,5 +1,5 @@
 const fetchAllDiscounts = async () => {
-  const apiRes = await fetch(`http://planted.duckdns.org:8080/discounts`, {
+  const apiRes = await fetch(`https://plantedserver.onrender.com/discounts`, {
     method: "GET",
     credentials: "include",
     headers: {

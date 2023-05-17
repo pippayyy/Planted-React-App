@@ -4,7 +4,7 @@ async function fetchDiscount({ queryKey }) {
   var discountcodeParam = discountcode == "" ? "none" : discountcode;
 
   const res = await fetch(
-    `http://planted.duckdns.org:8080/checkdiscount/code/${discountcodeParam}`,
+    `https://plantedserver.onrender.com/checkdiscount/code/${discountcodeParam}`,
     {
       method: "POST",
       credentials: "include",

@@ -40,7 +40,7 @@ const SignInup = () => {
   function signUp(userData) {
     const data = userData;
     //Send user details to be checked
-    fetch(`http://planted.duckdns.org:8080/signup`, {
+    fetch(`https://plantedserver.onrender.com/signup`, {
       method: "POST",
       credentials: "include",
       data: data,
@@ -63,7 +63,7 @@ const SignInup = () => {
   function signIn(userData) {
     const data = userData;
     //Send user details to be checked
-    fetch(`http://planted.duckdns.org:8080/signin`, {
+    fetch(`https://plantedserver.onrender.com/signin`, {
       method: "POST",
       credentials: "include",
       data: data,

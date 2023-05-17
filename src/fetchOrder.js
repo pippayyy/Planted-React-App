@@ -2,7 +2,7 @@ const fetchOrder = async ({ queryKey }) => {
   const selection = queryKey[1];
 
   const apiRes = await fetch(
-    `http://planted.duckdns.org:8080/order/getbasket/${selection}`,
+    `https://plantedserver.onrender.com/order/getbasket/${selection}`,
     {
       method: "POST",
       credentials: "include",

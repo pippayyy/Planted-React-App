@@ -2,7 +2,7 @@ const fetchProduct = async ({ queryKey }) => {
   const selection = queryKey[1];
 
   const apiRes = await fetch(
-    process.env.SERVER_URL + `/products/${selection}`,
+    `https://plantedserver.onrender.com/products/${selection}`,
     {
       method: "GET",
       credentials: "include",
