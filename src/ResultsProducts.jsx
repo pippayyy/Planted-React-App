@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import CardProduct from "./CardProduct";
 import { Row, Col } from "reactstrap";
 
@@ -13,33 +13,35 @@ const ResultsProduct = ({
   console.log("products from card", products);
   console.log("prodstatus", prodstatus);
 
-  const [productsSorted, setProductsSorted] = useState([]);
+  const [productsSorted, setProductsSorted] = useState(products);
 
-  switch (sortProducts) {
-    case "dateDesc":
-      //Sort by created date
-      setProductsSorted(
-        products.sort(
-          (a, b) => parseFloat(b.product_id) - parseFloat(a.product_id)
-        )
-      );
-      break;
-    case "priceAsc":
-      //Sort by price ascending
-      setProductsSorted(
-        products.sort((a, b) => parseFloat(a.price) - parseFloat(b.price))
-      );
-      break;
-    case "priceDesc":
-      //Sort by price descending
-      setProductsSorted(
-        products.sort((a, b) => parseFloat(b.price) - parseFloat(a.price))
-      );
-      break;
-    default:
-      //Default - no sort
-      setProductsSorted(products);
-  }
+  useEffect(() => {
+    switch (sortProducts) {
+      case "dateDesc":
+        //Sort by created date
+        setProductsSorted(
+          products.sort(
+            (a, b) => parseFloat(b.product_id) - parseFloat(a.product_id)
+          )
+        );
+        break;
+      case "priceAsc":
+        //Sort by price ascending
+        setProductsSorted(
+          products.sort((a, b) => parseFloat(a.price) - parseFloat(b.price))
+        );
+        break;
+      case "priceDesc":
+        //Sort by price descending
+        setProductsSorted(
+          products.sort((a, b) => parseFloat(b.price) - parseFloat(a.price))
+        );
+        break;
+      default:
+        //Default - no sort
+        setProductsSorted(products);
+    }
+  }, [sortProducts, products]);
 
   return (
     <Row className="g-2 my-2">
