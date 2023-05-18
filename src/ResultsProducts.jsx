@@ -31,13 +31,13 @@ const ResultsProduct = ({
       case "priceAsc":
         //Sort by price ascending
         setProductsSorted(
-          products.sort((a, b) => parseFloat(a.price) - parseFloat(b.price))
+          products.sort((a, b) => parseFloat(b.price) - parseFloat(a.price))
         );
         break;
       case "priceDesc":
         //Sort by price descending
         setProductsSorted(
-          products.sort((a, b) => parseFloat(b.price) - parseFloat(a.price))
+          products.sort((a, b) => parseFloat(a.price) - parseFloat(b.price))
         );
         break;
       default:
