@@ -3,7 +3,7 @@ import updateOrderDetails from "./funcUpdateOrderDetails";
 import addOrder from "./functionAddOrder";
 
 const addToBasket = function (prodId, refetch) {
-  fetch("/api/checkactiveorders/product/" + prodId, {
+  fetch("/api/order/checkactiveorders/product/" + prodId, {
     method: "POST",
     credentials: "include",
   })
