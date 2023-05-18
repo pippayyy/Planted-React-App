@@ -20,6 +20,7 @@ import SelectedCategoryContext from "./SelectedCategoryContext";
 import CardIconText from "./CardIconText";
 import fetchFavs from "./fetchFavs";
 import fetchSession from "./fetchSession";
+import ReactPaginate from "react-paginate";
 
 const Shop = () => {
   const [selectedCategory, setSelectedCategory] = useContext(
@@ -108,6 +109,23 @@ const Shop = () => {
   //Get refetch funciton to reload favs
   const favsRefetch = favsResults?.refetch;
 
+  //pagination stuff
+  const [currentPage, setCurrentPage] = useState(0);
+
+  const PER_PAGE = 5;
+  const offset = currentPage * PER_PAGE;
+  const currentPageData = productsSorted
+    .slice(offset, offset + PER_PAGE)
+    .map(({ thumburl }) => (
+      <img src={thumburl} key={thumburl} alt={thumburl} />
+    ));
+
+  const pageCount = Math.ceil(productsSorted.length / PER_PAGE);
+
+  function handlePageClick({ selected: selectedPage }) {
+    setCurrentPage(selectedPage);
+  }
+
   return (
     <Container fluid className="content-container">
       <Row>
@@ -154,8 +172,20 @@ const Shop = () => {
             </Input>
             <Label for="exampleSelect">SORT</Label>
           </FormGroup>
+          <ReactPaginate
+            previousLabel={"← Previous"}
+            nextLabel={"Next →"}
+            pageCount={pageCount}
+            onPageChange={handlePageClick}
+            containerClassName={"pagination"}
+            previousLinkClassName={"pagination__link"}
+            nextLinkClassName={"pagination__link"}
+            disabledClassName={"pagination__link--disabled"}
+            activeClassName={"pagination__link--active"}
+          />
+          {/* {currentPageData} */}
           <ResultsProduct
-            products={productsSorted}
+            products={currentPageData}
             favs={favs}
             refetch={favsRefetch}
             prodstatus={status}

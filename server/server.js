@@ -51,6 +51,19 @@ import {
 } from "./lib/admin.js";
 import multer from "multer";
 import fs from "fs";
+import MySQLStore from "express-mysql-session";
+
+const MySQLStoreSession = MySQLStore(session);
+
+const options = {
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASS,
+  database: process.env.DB_NAME,
+  port: "3306",
+};
+
+const sessionStore = new MySQLStoreSession(options);
 
 const app = express();
 
@@ -68,7 +81,7 @@ const transporter = nodemailer.createTransport({
 });
 
 var corsOptions = {
-  origin: "https://planted.onrender.com",
+  origin: ["https://planted.onrender.com"],
   credentials: true,
 };
 
@@ -84,10 +97,25 @@ app.use(express.urlencoded({ extended: true }));
 app.use(
   session({
     secret: process.env.SESSION_KEY,
-    resave: true,
-    saveUninitialized: true,
+    resave: false,
+    saveUninitialized: false,
+    key: "session_cookie_name",
+    store: sessionStore,
   })
 );
+
+// Optionally use onReady() to get a promise that resolves when store is ready.
+sessionStore
+  .onReady()
+  .then(() => {
+    // MySQL session store ready for use.
+    console.log("PIP MySQLStore ready");
+  })
+  .catch((error) => {
+    // Something went wrong.
+    console.log("PIP MySQLStore not ready");
+    console.error(error);
+  });
 
 //Storage used for image upload - admin functionality
 const storageIcons = multer.diskStorage({
@@ -496,6 +524,9 @@ app.post("/admin/category/edit", async (req, res) => {
 //Used for sign in
 app.post("/signin", async (req, res) => {
   const validUserDetails = await getCustomer(req.body.userEmail);
+
+  console.log("req.session.id:", req.session.id);
+  console.log("session:", req.session);
 
   //Check if valid user
   if (validUserDetails.length > 0) {
