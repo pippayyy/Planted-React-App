@@ -12,6 +12,8 @@ const ResultsProduct = ({
 }) => {
   console.log("products from card", products);
   console.log("prodstatus", prodstatus);
+  console.log("sortProducts", sortProducts);
+  console.log("productsSorted", productsSorted);
 
   const [productsSorted, setProductsSorted] = useState(products);
 
@@ -41,6 +43,7 @@ const ResultsProduct = ({
         //Default - no sort
         setProductsSorted(products);
     }
+    console.log("productsSorted in effect ", productsSorted);
   }, [sortProducts, products]);
 
   return (
