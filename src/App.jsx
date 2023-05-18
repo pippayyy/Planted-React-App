@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { createRoot } from "react-dom/client";
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { Routes, Route, Navigate, HashRouter } from "react-router-dom";
 import {
   QueryClient,
   QueryClientProvider,
@@ -92,7 +92,7 @@ function AdminRoute({ component: Component, altpath: Altpath, ...rest }) {
 const App = () => {
   const selectedCategory = useState(1);
   return (
-    <BrowserRouter>
+    <HashRouter>
       <QueryClientProvider client={queryClient}>
         <NavbarMobile />
         <SelectedCategoryContext.Provider value={selectedCategory}>
@@ -151,7 +151,7 @@ const App = () => {
         </SelectedCategoryContext.Provider>
         <FooterMobile />
       </QueryClientProvider>
-    </BrowserRouter>
+    </HashRouter>
   );
 };
 

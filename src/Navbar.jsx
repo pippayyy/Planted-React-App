@@ -44,7 +44,7 @@ const NavbarMobile = () => {
           <NavItem>
             <NavLink
               className="text-white float-start"
-              href="/products/category"
+              href="/#/products/category"
             >
               <h5 className="m-0 fw-light">
                 <Search className="fs-3 align-top me-1" /> Shop
@@ -52,21 +52,21 @@ const NavbarMobile = () => {
             </NavLink>
           </NavItem>
           <NavItem>
-            <NavLink className="text-white float-start" href="/about">
+            <NavLink className="text-white float-start" href="/#/about">
               <h5 className="m-0 fw-light">
                 <QuestionCircle className="fs-3 align-top me-1" /> About
               </h5>
             </NavLink>
           </NavItem>
           <NavItem>
-            <NavLink className="text-white float-start" href="/account">
+            <NavLink className="text-white float-start" href="/#/account">
               <h5 className="m-0 fw-light">
                 <Person className="fs-3 align-top me-1" /> My Account
               </h5>
             </NavLink>
           </NavItem>
           <NavItem>
-            <NavLink className="text-white float-start" href="/admin">
+            <NavLink className="text-white float-start" href="/#/admin">
               <h5 className="m-0 fw-light">
                 <Gear className="fs-3 align-top me-1" /> Admin
               </h5>
