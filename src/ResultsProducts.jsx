@@ -12,10 +12,11 @@ const ResultsProduct = ({
 }) => {
   console.log("products from card", products);
   console.log("prodstatus", prodstatus);
-  console.log("sortProducts", sortProducts);
-  console.log("productsSorted", productsSorted);
 
   const [productsSorted, setProductsSorted] = useState(products);
+
+  console.log("sortProducts", sortProducts);
+  console.log("productsSorted", productsSorted);
 
   useEffect(() => {
     switch (sortProducts) {
