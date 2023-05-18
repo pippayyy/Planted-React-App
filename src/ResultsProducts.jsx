@@ -1,3 +1,4 @@
+import { useState } from "react";
 import CardProduct from "./CardProduct";
 import { Row, Col } from "reactstrap";
 
@@ -7,9 +8,39 @@ const ResultsProduct = ({
   refetch,
   prodstatus,
   sessionExist,
+  sortProducts,
 }) => {
   console.log("products from card", products);
   console.log("prodstatus", prodstatus);
+
+  const [productsSorted, setProductsSorted] = useState([]);
+
+  switch (sortProducts) {
+    case "dateDesc":
+      //Sort by created date
+      setProductsSorted(
+        products.sort(
+          (a, b) => parseFloat(b.product_id) - parseFloat(a.product_id)
+        )
+      );
+      break;
+    case "priceAsc":
+      //Sort by price ascending
+      setProductsSorted(
+        products.sort((a, b) => parseFloat(a.price) - parseFloat(b.price))
+      );
+      break;
+    case "priceDesc":
+      //Sort by price descending
+      setProductsSorted(
+        products.sort((a, b) => parseFloat(b.price) - parseFloat(a.price))
+      );
+      break;
+    default:
+      //Default - no sort
+      setProductsSorted(products);
+  }
+
   return (
     <Row className="g-2 my-2">
       {!products.length && prodstatus == "success" ? (
@@ -22,7 +53,7 @@ const ResultsProduct = ({
           <h3 className="loader ms-2">꩜</h3>
         </div>
       ) : (
-        products.map((product) => (
+        productsSorted.map((product) => (
           <Col xs="6" md="4" key={product.product_id}>
             <CardProduct
               name={product.name}

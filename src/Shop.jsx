@@ -20,7 +20,7 @@ import SelectedCategoryContext from "./SelectedCategoryContext";
 import CardIconText from "./CardIconText";
 import fetchFavs from "./fetchFavs";
 import fetchSession from "./fetchSession";
-import ReactPaginate from "react-paginate";
+// import ReactPaginate from "react-paginate";
 
 const Shop = () => {
   const [selectedCategory, setSelectedCategory] = useContext(
@@ -42,7 +42,6 @@ const Shop = () => {
   const [searchParamSection, setSearchParamSection] = useState("");
   const [searchParam, setSearchParam] = useState("");
   const [sortValue, setSortValue] = useState("");
-  const [productsSorted, setProductsSorted] = useState("");
 
   //Get products json based on category selected
   const [products, status] = useFetchProduct(
@@ -55,44 +54,44 @@ const Shop = () => {
   }, []);
 
   //Used to sort products
-  useEffect(() => {
-    console.log("in product useefect");
-    setProductsSorted(products);
-  }, [products]);
+  // useEffect(() => {
+  //   console.log("in product useefect");
+  //   setProductsSorted(products);
+  // }, [products]);
 
   //Used to sort products
-  useEffect(() => {
-    console.log("sortValue: ", sortValue);
-    console.log("productsSorted pip : ", productsSorted);
-    switch (sortValue) {
-      case "dateDesc":
-        //Sort by created date
-        setProductsSorted(
-          productsSorted.sort(
-            (a, b) => parseFloat(b.product_id) - parseFloat(a.product_id)
-          )
-        );
-        break;
-      case "priceAsc":
-        //Sort by price ascending
-        setProductsSorted(
-          productsSorted.sort(
-            (a, b) => parseFloat(a.price) - parseFloat(b.price)
-          )
-        );
-        break;
-      case "priceDesc":
-        //Sort by price descending
-        setProductsSorted(
-          productsSorted.sort(
-            (a, b) => parseFloat(b.price) - parseFloat(a.price)
-          )
-        );
-        break;
-      default:
-      // code block
-    }
-  }, [sortValue]);
+  // useEffect(() => {
+  //   console.log("sortValue: ", sortValue);
+  //   console.log("productsSorted pip : ", productsSorted);
+  //   switch (sortValue) {
+  //     case "dateDesc":
+  //       //Sort by created date
+  //       setProductsSorted(
+  //         productsSorted.sort(
+  //           (a, b) => parseFloat(b.product_id) - parseFloat(a.product_id)
+  //         )
+  //       );
+  //       break;
+  //     case "priceAsc":
+  //       //Sort by price ascending
+  //       setProductsSorted(
+  //         productsSorted.sort(
+  //           (a, b) => parseFloat(a.price) - parseFloat(b.price)
+  //         )
+  //       );
+  //       break;
+  //     case "priceDesc":
+  //       //Sort by price descending
+  //       setProductsSorted(
+  //         productsSorted.sort(
+  //           (a, b) => parseFloat(b.price) - parseFloat(a.price)
+  //         )
+  //       );
+  //       break;
+  //     default:
+  //     // code block
+  //   }
+  // }, [sortValue]);
 
   //Check if session exists
   const sessionResults = useQuery(["getSessionDetail"], fetchSession, 0, {
@@ -110,21 +109,21 @@ const Shop = () => {
   const favsRefetch = favsResults?.refetch;
 
   //pagination stuff
-  const [currentPage, setCurrentPage] = useState(0);
+  // const [currentPage, setCurrentPage] = useState(0);
 
-  const PER_PAGE = 5;
-  const offset = currentPage * PER_PAGE;
-  const currentPageData = productsSorted
-    .slice(offset, offset + PER_PAGE)
-    .map(({ thumburl }) => (
-      <img src={thumburl} key={thumburl} alt={thumburl} />
-    ));
+  // const PER_PAGE = 5;
+  // const offset = currentPage * PER_PAGE;
+  // const currentPageData = productsSorted
+  //   .slice(offset, offset + PER_PAGE)
+  //   .map(({ thumburl }) => (
+  //     <img src={thumburl} key={thumburl} alt={thumburl} />
+  //   ));
 
-  const pageCount = Math.ceil(productsSorted.length / PER_PAGE);
+  // const pageCount = Math.ceil(productsSorted.length / PER_PAGE);
 
-  function handlePageClick({ selected: selectedPage }) {
-    setCurrentPage(selectedPage);
-  }
+  // function handlePageClick({ selected: selectedPage }) {
+  //   setCurrentPage(selectedPage);
+  // }
 
   return (
     <Container fluid className="content-container">
@@ -166,13 +165,13 @@ const Shop = () => {
               }}
             >
               <option value="dateAsc">Recommended</option>
-              <option value="dateDesc">What's New</option>
+              <option value="dateDesc">Whats New</option>
               <option value="priceAsc">Price: Low to High</option>
               <option value="priceDesc">Price: High to Low</option>
             </Input>
             <Label for="exampleSelect">SORT</Label>
           </FormGroup>
-          <ReactPaginate
+          {/* <ReactPaginate
             previousLabel={"← Previous"}
             nextLabel={"Next →"}
             pageCount={pageCount}
@@ -182,14 +181,15 @@ const Shop = () => {
             nextLinkClassName={"pagination__link"}
             disabledClassName={"pagination__link--disabled"}
             activeClassName={"pagination__link--active"}
-          />
+          /> */}
           {/* {currentPageData} */}
           <ResultsProduct
-            products={currentPageData}
+            products={products}
             favs={favs}
             refetch={favsRefetch}
             prodstatus={status}
             sessionExist={sessionExist}
+            sortProducts={sortValue}
           />
           <Row>
             <Col xs="0" md="3" className=""></Col>
