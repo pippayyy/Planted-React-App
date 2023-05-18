@@ -1,5 +1,5 @@
 const fetchCategory = async () => {
-  const apiRes = await fetch(`https://plantedserver.onrender.com/categories`, {
+  const apiRes = await fetch(`/api/categories`, {
     method: "GET",
     credentials: "include",
     headers: {

@@ -1,16 +1,13 @@
 const fetchProduct = async ({ queryKey }) => {
   const selection = queryKey[1];
 
-  const apiRes = await fetch(
-    `https://plantedserver.onrender.com/products/${selection}`,
-    {
-      method: "GET",
-      credentials: "include",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    }
-  );
+  const apiRes = await fetch(`/api/products/${selection}`, {
+    method: "GET",
+    credentials: "include",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
 
   if (!apiRes.ok) {
     throw new Error(`products fetch is not ok`);

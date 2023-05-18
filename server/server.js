@@ -51,19 +51,19 @@ import {
 } from "./lib/admin.js";
 import multer from "multer";
 import fs from "fs";
-import MySQLStore from "express-mysql-session";
+// import MySQLStore from "express-mysql-session";
 
-const MySQLStoreSession = MySQLStore(session);
+// const MySQLStoreSession = MySQLStore(session);
 
-const options = {
-  host: process.env.DB_HOST,
-  user: process.env.DB_USER,
-  password: process.env.DB_PASS,
-  database: process.env.DB_NAME,
-  port: "3306",
-};
+// const options = {
+//   host: process.env.DB_HOST,
+//   user: process.env.DB_USER,
+//   password: process.env.DB_PASS,
+//   database: process.env.DB_NAME,
+//   port: "3306",
+// };
 
-const sessionStore = new MySQLStoreSession(options);
+// const sessionStore = new MySQLStoreSession(options);
 
 const app = express();
 
@@ -99,23 +99,23 @@ app.use(
     secret: process.env.SESSION_KEY,
     resave: false,
     saveUninitialized: false,
-    key: "session_cookie_name",
-    store: sessionStore,
+    // key: "session_cookie_name",
+    // store: sessionStore,
   })
 );
 
 // Optionally use onReady() to get a promise that resolves when store is ready.
-sessionStore
-  .onReady()
-  .then(() => {
-    // MySQL session store ready for use.
-    console.log("PIP MySQLStore ready");
-  })
-  .catch((error) => {
-    // Something went wrong.
-    console.log("PIP MySQLStore not ready");
-    console.error(error);
-  });
+// sessionStore
+//   .onReady()
+//   .then(() => {
+//     // MySQL session store ready for use.
+//     console.log("PIP MySQLStore ready");
+//   })
+//   .catch((error) => {
+//     // Something went wrong.
+//     console.log("PIP MySQLStore not ready");
+//     console.error(error);
+//   });
 
 //Storage used for image upload - admin functionality
 const storageIcons = multer.diskStorage({
@@ -148,7 +148,7 @@ const storageImages = multer.diskStorage({
 const uploadImages = multer({ storage: storageImages });
 
 // Log user out
-app.delete("/logout", (req, res) => {
+app.delete("/api/logout", (req, res) => {
   if (req.session) {
     req.session.destroy((err) => {
       if (err) {
@@ -163,7 +163,7 @@ app.delete("/logout", (req, res) => {
 });
 
 //Used for sign up
-app.post("/signup", async (req, res) => {
+app.post("/api/signup", async (req, res) => {
   //Check if user already exists
   const validUserDetails = await getCustomer(req.body.userEmail);
 
@@ -231,7 +231,7 @@ app.post("/signup", async (req, res) => {
 
 //Used to add new products
 app.post(
-  "/admin/product/add",
+  "/api/admin/product/add",
   uploadImages.single("image"),
   async (req, res) => {
     //Check if code already exists
@@ -259,7 +259,7 @@ app.post(
 );
 
 //Update discount code detail
-app.post("/admin/product/edit", async (req, res) => {
+app.post("/api/admin/product/edit", async (req, res) => {
   //Update discount details
   const updateResponse = await updateProduct(
     req.body.dbId,
@@ -290,7 +290,7 @@ app.post("/admin/product/edit", async (req, res) => {
 });
 
 //Used to add new discounts
-app.post("/admin/discount/add", async (req, res) => {
+app.post("/api/admin/discount/add", async (req, res) => {
   console.log(
     "vars: ",
     req.body.discountCode,
@@ -331,7 +331,7 @@ app.post("/admin/discount/add", async (req, res) => {
 });
 
 //Del discount
-app.post("/admin/discount/del", async (req, res) => {
+app.post("/api/admin/discount/del", async (req, res) => {
   console.log("discountId: ", req.body.discountId);
   //Del discount code
   const delResponse = await delDiscount(req.body.discountId);
@@ -355,7 +355,7 @@ app.post("/admin/discount/del", async (req, res) => {
 });
 
 //Del category
-app.post("/admin/category/del", async (req, res) => {
+app.post("/api/admin/category/del", async (req, res) => {
   //Get product img url
   const categoryImgPath = await getCategoryImg(req.body.categoryId);
 
@@ -385,7 +385,7 @@ app.post("/admin/category/del", async (req, res) => {
 });
 
 //Del product
-app.post("/admin/product/del", async (req, res) => {
+app.post("/api/admin/product/del", async (req, res) => {
   //Get product img url
   const prodImgPath = await getProdImg(req.body.productId);
 
@@ -416,7 +416,7 @@ app.post("/admin/product/del", async (req, res) => {
 
 //Used to add new categories
 app.post(
-  "/admin/category/add",
+  "/api/admin/category/add",
   uploadIcons.single("image"),
   async (req, res) => {
     console.log("req: ", req);
@@ -454,7 +454,7 @@ app.post(
 );
 
 //Update discount code detail
-app.post("/admin/discount/edit", async (req, res) => {
+app.post("/api/admin/discount/edit", async (req, res) => {
   //Update discount details
   const updateResponse = await updateDiscount(
     req.body.dbId,
@@ -482,7 +482,7 @@ app.post("/admin/discount/edit", async (req, res) => {
 });
 
 //Update discount code detail
-app.post("/admin/category/edit", async (req, res) => {
+app.post("/api/admin/category/edit", async (req, res) => {
   console.log("req: ", req);
 
   //Update discount details
@@ -522,7 +522,7 @@ app.post("/admin/category/edit", async (req, res) => {
 });
 
 //Used for sign in
-app.post("/signin", async (req, res) => {
+app.post("/api/signin", async (req, res) => {
   const validUserDetails = await getCustomer(req.body.userEmail);
 
   console.log("req.session.id:", req.session.id);
@@ -565,7 +565,7 @@ app.post("/signin", async (req, res) => {
 });
 
 //Get user's session
-app.get("/getsession", function (req, res) {
+app.get("/api/getsession", function (req, res) {
   var sessionDetails = [
     {
       pipTest: "Test123",
@@ -583,7 +583,7 @@ app.get("/getsession", function (req, res) {
 });
 
 // Check if session exists
-app.get("/checksession", (req, res) => {
+app.get("/api/checksession", (req, res) => {
   if (req.session && req.session.userId) {
     console.log("checksession - exists");
     res.json({ outcome: { message: "success" } });
@@ -594,7 +594,7 @@ app.get("/checksession", (req, res) => {
 });
 
 // Check if ADMIN session exists
-app.get("/checksession/admin", async (req, res) => {
+app.get("/api/checksession/admin", async (req, res) => {
   if (req.session && req.session.userId) {
     const validUserDetails = await getCustomerById(req.session.userId);
 
@@ -619,49 +619,49 @@ app.get("/checksession/admin", async (req, res) => {
 });
 
 //Used to get all categories
-app.get("/categories", async (req, res) => {
+app.get("/api/categories", async (req, res) => {
   const categories = await getAllCategories();
 
   res.json({ categories: categories });
 });
 
 //Used to get active categories
-app.get("/categories/active", async (req, res) => {
+app.get("/api/categories/active", async (req, res) => {
   const categories = await getActiveCategories();
 
   res.json({ categories: categories });
 });
 
 //Used to get all products
-app.get("/products", async (req, res) => {
+app.get("/api/products", async (req, res) => {
   const products = await getAllProducts();
 
   res.json({ products: products });
 });
 
 //Used to get products - new arrivals
-app.get("/products/buttNewArrivals", async (req, res) => {
+app.get("/api/products/buttNewArrivals", async (req, res) => {
   const products = await getProductsNew();
 
   res.json({ products: products });
 });
 
 //Used to get products - best sellers
-app.get("/products/buttBestSellers", async (req, res) => {
+app.get("/api/products/buttBestSellers", async (req, res) => {
   const products = await getProductsBest();
 
   res.json({ products: products });
 });
 
 //Used to get products - sale items
-app.get("/products/buttSale", async (req, res) => {
+app.get("/api/products/buttSale", async (req, res) => {
   const products = await getProductsSale();
 
   res.json({ products: products });
 });
 
 //Used to get products - by category id - including Sale and All (not categories)
-app.get("/products/category/:id", async (req, res) => {
+app.get("/api/products/category/:id", async (req, res) => {
   const products = await (req.params.id == "sale"
     ? getProductsSale()
     : req.params.id == "all"
@@ -672,28 +672,28 @@ app.get("/products/category/:id", async (req, res) => {
 });
 
 //Used to get products - using search filter
-app.get("/products/category/:id/search/:searchfilter", async (req, res) => {
+app.get("/api/products/category/:id/search/:searchfilter", async (req, res) => {
   const products = await getProductBySearch(req.params.searchfilter);
 
   res.json({ products: products });
 });
 
 //Used to get products - gets all products when search filter is cleared/an empty string
-app.get("/products/category/:id/search/", async (req, res) => {
+app.get("/api/products/category/:id/search/", async (req, res) => {
   const products = await getAllProducts();
 
   res.json({ products: products });
 });
 
 //Used to get one product using productID
-app.get("/products/:id", async (req, res) => {
+app.get("/api/products/:id", async (req, res) => {
   const products = await getProductById(req.params.id);
 
   res.json({ products: products });
 });
 
 //Check if 'Active' row in orders table for a specific customer
-app.post("/order/checkactiveorders", async (req, res) => {
+app.post("/api/order/checkactiveorders", async (req, res) => {
   const activeOrdersForCust = await getOrderForCust(
     req.session.userId,
     "Basket"
@@ -703,7 +703,7 @@ app.post("/order/checkactiveorders", async (req, res) => {
 });
 
 //Get basket details for customer - one row per product in basket - includes product details
-app.post("/order/getbasket/orderstatus/:orderstatus", async (req, res) => {
+app.post("/api/order/getbasket/orderstatus/:orderstatus", async (req, res) => {
   if (req.session && req.session.userId) {
     const activeOrdersForCust = await getBasket(
       req.session.userId,
@@ -716,18 +716,21 @@ app.post("/order/getbasket/orderstatus/:orderstatus", async (req, res) => {
 });
 
 //Check if 'Active' row in orders table for a specific customer AND return product details (qty) if that product in order already
-app.post("/order/checkactiveorders/product/:productid", async (req, res) => {
-  const activeOrdersForCust = await getOrderForCustProd(
-    req.session.userId,
-    "Basket",
-    req.params.productid
-  );
+app.post(
+  "/api/order/checkactiveorders/product/:productid",
+  async (req, res) => {
+    const activeOrdersForCust = await getOrderForCustProd(
+      req.session.userId,
+      "Basket",
+      req.params.productid
+    );
 
-  res.json({ outcome: activeOrdersForCust });
-});
+    res.json({ outcome: activeOrdersForCust });
+  }
+);
 
 //Post data to add new row in order table
-app.post("/order/create", async (req, res) => {
+app.post("/api/order/create", async (req, res) => {
   const outcome = await postNewOrder(req.session.userId);
 
   res.json({ outcome: outcome });
@@ -735,7 +738,7 @@ app.post("/order/create", async (req, res) => {
 
 //Post data to add row in order_details table - when item added to bag
 app.post(
-  "/orderdetails/add/order/:orderid/product/:productid",
+  "/api/orderdetails/add/order/:orderid/product/:productid",
   async (req, res) => {
     const outcome = await postNewOrderDetails(
       req.params.orderid,
@@ -748,7 +751,7 @@ app.post(
 
 //Post data to increase qty of product in order_details table - when item added to bag
 app.post(
-  "/orderdetails/update/order/:orderid/product/:productid/productqty/:productqty",
+  "/api/orderdetails/update/order/:orderid/product/:productid/productqty/:productqty",
   async (req, res) => {
     //If product qty in basket set to zero, remove it from the bag
     if (req.params.productqty == 0) {
@@ -770,7 +773,7 @@ app.post(
 
 //Decrease stock in product table when item added to bag
 app.post(
-  "/update/stock/product/:productid/productqty/:productqty",
+  "/api/update/stock/product/:productid/productqty/:productqty",
   async (req, res) => {
     const outcome = await postUpdateProdStock(
       req.params.productid,
@@ -782,21 +785,21 @@ app.post(
 );
 
 //Check if discount code is valid
-app.post("/checkdiscount/code/:discountcode", async (req, res) => {
+app.post("/api/checkdiscount/code/:discountcode", async (req, res) => {
   const outcome = await getDiscountCode(req.params.discountcode);
 
   res.json({ outcome: outcome });
 });
 
 //Used to get all active delivery options
-app.get("/order/getdeliveryoptions", async (req, res) => {
+app.get("/api/order/getdeliveryoptions", async (req, res) => {
   const options = await getDeliveryOptions();
 
   res.json({ outcome: options });
 });
 
 //Check if discount code is valid
-app.post("/order/placeorder", async (req, res) => {
+app.post("/api/order/placeorder", async (req, res) => {
   //Add delivery address to address table - return new auto address id
   const deliveryAddressId = await addDeliveryAddress(
     req.body.houseDelivery,
@@ -1142,7 +1145,7 @@ app.post("/order/placeorder", async (req, res) => {
 });
 
 //Get customer's favs
-app.get("/favourties", async (req, res) => {
+app.get("/api/favourties", async (req, res) => {
   console.log("req.session: ", req.session.userId ? req.session.userId : null);
   const favs = await getFavs(req.session.userId ? req.session.userId : null);
 
@@ -1150,7 +1153,7 @@ app.get("/favourties", async (req, res) => {
 });
 
 //Get prev orders for customer
-app.get("/getorders", async (req, res) => {
+app.get("/api/getorders", async (req, res) => {
   const orders = await getPrevOrders(req.session.userId);
 
   res.json({
@@ -1163,39 +1166,42 @@ app.get("/getorders", async (req, res) => {
 });
 
 //Get prev orders for customer
-app.get("/getorder/latest", async (req, res) => {
+app.get("/api/getorder/latest", async (req, res) => {
   const orders = await getLatestOrder(req.session.userId);
 
   res.json({ outcome: orders });
 });
 
 //Get prev order details
-app.get("/getorders/orderid/:orderid", async (req, res) => {
+app.get("/api/getorders/orderid/:orderid", async (req, res) => {
   const orders = await getOrderDetails(req.params.orderid);
 
   res.json({ outcome: orders });
 });
 
 //Delete item from favs
-app.post("/favourites/del/prod/:prodId", async (req, res) => {
+app.post("/api/favourites/del/prod/:prodId", async (req, res) => {
   const outcome = await delItemFav(req.session.userId, req.params.prodId);
 
   res.json({ outcome: outcome });
 });
 
 //Add item from favs
-app.post("/favourites/add/prod/:prodId", async (req, res) => {
+app.post("/api/favourites/add/prod/:prodId", async (req, res) => {
   const outcome = await addToFavs(req.session.userId, req.params.prodId);
 
   res.json({ outcome: outcome });
 });
 
 //Get all discount codes
-app.get("/discounts", async (req, res) => {
+app.get("/api/discounts", async (req, res) => {
   const discounts = await getAllDiscounts();
 
   res.json({ outcome: discounts });
 });
+
+//Static router to serve react front-end
+app.use(express.static("src/dist"));
 
 // set port, listen for requests
 const PORT = process.env.PORT || 8080;

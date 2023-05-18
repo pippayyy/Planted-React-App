@@ -1,5 +1,5 @@
 async function fetchSession() {
-  const res = await fetch(`https://plantedserver.onrender.com/checksession`, {
+  const res = await fetch(`/api/checksession`, {
     method: "GET",
     credentials: "include",
     headers: {

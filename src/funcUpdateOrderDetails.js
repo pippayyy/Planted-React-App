@@ -8,8 +8,7 @@ const updateOrderDetails = function updateOrderDetails(
   //update existing row in order details table for product- altering the qty (- or +)
   var newprodQty = prodQty + qtyToUpdate;
   fetch(
-    process.env.SERVER_URL +
-      "/orderdetails/update/order/" +
+    "/api/orderdetails/update/order/" +
       orderId +
       "/product/" +
       prodId +

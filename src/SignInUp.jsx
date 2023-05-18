@@ -40,7 +40,7 @@ const SignInup = () => {
   function signUp(userData) {
     const data = userData;
     //Send user details to be checked
-    fetch(`https://plantedserver.onrender.com/signup`, {
+    fetch(`/api/signup`, {
       method: "POST",
       credentials: "include",
       data: data,
@@ -63,7 +63,7 @@ const SignInup = () => {
   function signIn(userData) {
     const data = userData;
     //Send user details to be checked
-    fetch(`https://plantedserver.onrender.com/signin`, {
+    fetch(`/api/signin`, {
       method: "POST",
       credentials: "include",
       data: data,

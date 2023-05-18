@@ -1,5 +1,5 @@
 async function fetchFavs() {
-  const res = await fetch(`https://plantedserver.onrender.com/favourties`, {
+  const res = await fetch(`/api/favourties`, {
     method: "GET",
     credentials: "include",
     headers: {

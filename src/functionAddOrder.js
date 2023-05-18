@@ -1,6 +1,6 @@
 const addOrder = function (prodId, refetch, addToOrderDetails) {
   //create row in orders table using customer id
-  fetch(process.env.SERVER_URL + "/order/create", {
+  fetch("/api/order/create", {
     method: "POST",
     credentials: "include",
   })

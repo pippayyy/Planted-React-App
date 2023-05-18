@@ -1,6 +1,6 @@
 const addFav = function (prodId, refetch = null) {
   //create row in favourites table
-  fetch("http://planted.duckdns.org:8080/favourites/add/prod/" + prodId, {
+  fetch("/api/favourites/add/prod/" + prodId, {
     method: "POST",
     credentials: "include",
   }).then((response) => {

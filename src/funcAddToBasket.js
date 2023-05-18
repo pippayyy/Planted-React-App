@@ -3,13 +3,10 @@ import updateOrderDetails from "./funcUpdateOrderDetails";
 import addOrder from "./functionAddOrder";
 
 const addToBasket = function (prodId, refetch) {
-  fetch(
-    "http://planted.duckdns.org:8080/order/checkactiveorders/product/" + prodId,
-    {
-      method: "POST",
-      credentials: "include",
-    }
-  )
+  fetch("/api/checkactiveorders/product/" + prodId, {
+    method: "POST",
+    credentials: "include",
+  })
     .then((response) => response.json())
     .then((response) => {
       //If Active row in orders table for customer

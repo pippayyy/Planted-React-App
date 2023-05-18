@@ -1,5 +1,5 @@
 const fetchAllDiscounts = async () => {
-  const apiRes = await fetch(`https://plantedserver.onrender.com/discounts`, {
+  const apiRes = await fetch(`/api/discounts`, {
     method: "GET",
     credentials: "include",
     headers: {

@@ -1,5 +1,5 @@
 async function fetchOrders() {
-  const res = await fetch(`https://plantedserver.onrender.com/getorders`, {
+  const res = await fetch(`/api/getorders`, {
     method: "GET",
     credentials: "include",
     headers: {

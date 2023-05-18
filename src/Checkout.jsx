@@ -171,7 +171,7 @@ const Checkout = () => {
 
   //function to place order
   function placeOrder(orderObject) {
-    fetch("https://plantedserver.onrender.com/order/placeorder", {
+    fetch("/api/order/placeorder", {
       method: "POST",
       credentials: "include",
       data: orderObject,
