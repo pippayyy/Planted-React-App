@@ -83,15 +83,15 @@ const NavbarMobile = () => {
       </NavbarBrand>
       <Nav className="nav navbar-nav navbar-right justify-content-end" navbar>
         <ul className="p-0">
-          <li className="text-white" href="/login">
-            <a href="/account" className="">
+          <li className="text-white" href="#">
+            <Link to={`/account`} className="category-button text-white">
               <Person className="fs-3" />
-            </a>
+            </Link>
           </li>
-          <li className="text-white" href="/favourites">
-            <a href="/favourites" className="">
+          <li className="text-white" href="#">
+            <Link to={`/favourites`} className="category-button text-white">
               <Heart className="fs-3" />
-            </a>
+            </Link>
           </li>
           <li className="text-white" href="#">
             <Link to={`/bag`} className="category-button text-white">

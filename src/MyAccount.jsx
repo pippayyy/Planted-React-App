@@ -20,7 +20,7 @@ const MyAccount = () => {
 
   //function to place order
   function logout() {
-    fetch("http://planted.duckdns.org:8080/logout", {
+    fetch("/api/logout", {
       method: "DELETE",
       credentials: "include",
     })
