@@ -22,7 +22,8 @@ const Home = () => {
   //Refetch session on page load to ensure correct session status is set
   useEffect(() => {
     sessionRefetch();
-  }, [sessionRefetch]);
+    favsRefetch();
+  });
 
   //Used to get category data and populate category sections
   const resultsCategories = useQuery(["getCategories"], fetchCategoryActive);
