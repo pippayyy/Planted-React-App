@@ -92,7 +92,7 @@ app.use(
 //Storage used for image upload - admin functionality
 const storageIcons = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, "../src/dist/images/icons");
+    cb(null, "/images/icons");
   },
   filename: (req, file, cb) => {
     cb(null, Date.now() + file.originalname);
@@ -105,7 +105,7 @@ const uploadIcons = multer({ storage: storageIcons });
 //Storage used for image upload - admin functionality
 const storageImages = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, "../src/dist/images");
+    cb(null, "/images");
   },
   filename: (req, file, cb) => {
     cb(null, Date.now() + file.originalname);
