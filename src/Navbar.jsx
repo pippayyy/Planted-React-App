@@ -84,7 +84,7 @@ const NavbarMobile = () => {
       <Nav className="nav navbar-nav navbar-right justify-content-end" navbar>
         <ul className="p-0">
           <li className="text-white" href="#">
-            <a href="/#/account`" className="category-button text-white">
+            <a href="/#/account" className="category-button text-white">
               <Person className="fs-3" />
             </a>
           </li>
