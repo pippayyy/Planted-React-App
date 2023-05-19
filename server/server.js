@@ -706,6 +706,9 @@ app.post("/api/order/checkactiveorders", async (req, res) => {
 //Get basket details for customer - one row per product in basket - includes product details
 app.post("/api/order/getbasket/orderstatus/:orderstatus", async (req, res) => {
   if (req.session && req.session.userId) {
+    console.log("in get basket api");
+    console.log("req.session.userId", req.session.userId);
+    console.log("req.params.orderstatus", req.params.orderstatus);
     const activeOrdersForCust = await getBasket(
       req.session.userId,
       req.params.orderstatus
@@ -720,6 +723,8 @@ app.post("/api/order/getbasket/orderstatus/:orderstatus", async (req, res) => {
 app.post(
   "/api/order/checkactiveorders/product/:productid",
   async (req, res) => {
+    console.log("req.session.userId: ", req.session.userId);
+    console.log("req.params.productid: ", req.params.productid);
     const activeOrdersForCust = await getOrderForCustProd(
       req.session.userId,
       "Basket",
@@ -741,9 +746,14 @@ app.post("/api/order/create", async (req, res) => {
 app.post(
   "/api/orderdetails/add/order/:orderid/product/:productid",
   async (req, res) => {
+    var date = new Date();
+
+    console.log("date.toISOString() : ", date.toISOString());
+
     const outcome = await postNewOrderDetails(
       req.params.orderid,
-      req.params.productid
+      req.params.productid,
+      date.toISOString()
     );
 
     res.json({ outcome: outcome });
@@ -754,6 +764,9 @@ app.post(
 app.post(
   "/api/orderdetails/update/order/:orderid/product/:productid/productqty/:productqty",
   async (req, res) => {
+    var date = new Date();
+    console.log("date.toISOString() : ", date.toISOString());
+
     //If product qty in basket set to zero, remove it from the bag
     if (req.params.productqty == 0) {
       const outcome = await delItemOrderDetails(
@@ -765,7 +778,8 @@ app.post(
       const outcome = await postUpdateOrderDetails(
         req.params.orderid,
         req.params.productid,
-        req.params.productqty
+        req.params.productqty,
+        date.toISOString()
       );
       res.json({ outcome: outcome });
     }

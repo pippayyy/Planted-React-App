@@ -14,7 +14,7 @@ const Home = () => {
   //Refetch session on page load to ensure correct session status is set
   useEffect(() => {
     sessionRefetch();
-  }, []);
+  }, [sessionRefetch]);
 
   //Check if session exists
   const sessionResults = useQuery(["getSessionDetail"], fetchSession, 0, {

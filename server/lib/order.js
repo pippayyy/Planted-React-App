@@ -50,10 +50,10 @@ export const postNewOrder = async (custId) => {
   return response;
 };
 
-export const postNewOrderDetails = async (orderId, prodId) => {
+export const postNewOrderDetails = async (orderId, prodId, currentDate) => {
   const [response] = await connection.query(
-    "INSERT INTO `order_details` (order_id,product_id,product_qty) VALUES (?,?,?)",
-    [orderId, prodId, 1],
+    "INSERT INTO `order_details` (order_id,product_id,product_qty,date_added) VALUES (?,?,?,?)",
+    [orderId, prodId, 1, currentDate],
     (error, res) => {
       if (error) return res.json({ error: error });
     }
@@ -62,10 +62,15 @@ export const postNewOrderDetails = async (orderId, prodId) => {
   return response;
 };
 
-export const postUpdateOrderDetails = async (orderId, prodId, prodQty) => {
+export const postUpdateOrderDetails = async (
+  orderId,
+  prodId,
+  prodQty,
+  currentDate
+) => {
   const [response] = await connection.query(
-    "UPDATE `order_details` SET product_qty = ? WHERE order_id = ? AND product_id = ?",
-    [prodQty, orderId, prodId],
+    "UPDATE `order_details` SET product_qty = ?, date_added = ? WHERE order_id = ? AND product_id = ?",
+    [prodQty, currentDate, orderId, prodId],
     (error, res) => {
       if (error) return res.json({ error: error });
     }
