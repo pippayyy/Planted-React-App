@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { CheckCircle, ExclamationCircle } from "react-bootstrap-icons";
-import { NavLink, useNavigate } from "react-router-dom";
+import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
 import {
   Container,
   Row,
@@ -19,11 +19,14 @@ import {
 
 const SignInup = () => {
   //Check if redirected to this page
-  // const location = useLocation();
-  // const { redirectFlag } = location.state ?? false;
+  const location = useLocation();
+  const { redirectUrl } = location.state ?? "/";
 
   //Set default value for selected section
   const [selectedSection, setSelectedSection] = useState(1);
+
+  //Set continueButtonVis
+  const [continueButtonVis, setContinueButtonVis] = useState(false);
 
   //Set default value for selected section
   const [authOutcome, setAuthOutcome] = useState({
@@ -84,7 +87,7 @@ const SignInup = () => {
   }
 
   //Use Navigate to go back to prev section
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   useEffect(() => {
     //Check if logged in worked, then nav away
@@ -92,8 +95,9 @@ const SignInup = () => {
       ? setTimeout(() => {
           // After 1.5 seconds, navigate away
           // !redirectFlag ? navigate(-1) : navigate(-2);
-          navigate("/");
-        }, 1500)
+          // navigate("/");
+          setContinueButtonVis(true);
+        }, 500)
       : null;
   }, [authOutcome]);
 
@@ -194,6 +198,21 @@ const SignInup = () => {
                               </Alert>
                             )}
                           </Col>
+                          {continueButtonVis ? (
+                            <Col xs="12" className="mb-2">
+                              <Link
+                                to={redirectUrl}
+                                className="category-button"
+                              >
+                                <Button
+                                  block
+                                  className="button-colour border-0 text-black rounded-4 d-flex justify-content-center align-items-center py-3"
+                                >
+                                  <h5 className="m-0">Continue</h5>
+                                </Button>
+                              </Link>
+                            </Col>
+                          ) : null}
                         </Form>
                       ) : (
                         <Form
@@ -287,6 +306,21 @@ const SignInup = () => {
                               </Alert>
                             )}
                           </Col>
+                          {continueButtonVis ? (
+                            <Col xs="12" className="mb-2">
+                              <Link
+                                to={redirectUrl}
+                                className="category-button"
+                              >
+                                <Button
+                                  block
+                                  className="button-colour border-0 text-black rounded-4 d-flex justify-content-center align-items-center py-3"
+                                >
+                                  <h5 className="m-0">Continue</h5>
+                                </Button>
+                              </Link>
+                            </Col>
+                          ) : null}
                         </Form>
                       )}
                     </Row>

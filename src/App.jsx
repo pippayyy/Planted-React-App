@@ -56,7 +56,7 @@ function ProtectedRoute({ component: Component, altpath: Altpath, ...rest }) {
           to={Altpath}
           state={{
             message: "It seems like you are not signed in!",
-            redirectFlag: true,
+            redirectUrl: "/",
           }}
         />
       );
@@ -81,7 +81,7 @@ function AdminRoute({ component: Component, altpath: Altpath, ...rest }) {
           to={Altpath}
           state={{
             message: "You don't have admin permissions, sorry!",
-            redirectFlag: true,
+            redirectUrl: "/admin",
           }}
         />
       );

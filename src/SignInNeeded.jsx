@@ -5,7 +5,7 @@ const SignInNeeded = () => {
   //Get id of product selected on prev page
   const location = useLocation();
   console.log("location.state: ", location.state);
-  const { message } = location.state;
+  const { message, redirectUrl } = location.state;
 
   return (
     <Container fluid className="content-container">
@@ -38,7 +38,7 @@ const SignInNeeded = () => {
                       >
                         <Link
                           to={`/login`}
-                          state={{ redirectFlag: true }}
+                          state={{ redirectUrl: redirectUrl ?? "/" }}
                           className="category-button"
                         >
                           <Button

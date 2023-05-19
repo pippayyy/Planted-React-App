@@ -100,7 +100,7 @@ const Detail = () => {
         : navigate("/oops", {
             state: {
               message: "It seems like you are not signed in!",
-              redirectFlag: true,
+              redirectUrl: "/",
             },
           })
       : null;
@@ -113,7 +113,7 @@ const Detail = () => {
         : navigate("/oops", {
             state: {
               message: "It seems like you are not signed in!",
-              redirectFlag: true,
+              redirectUrl: "/",
             },
           })
       : null;
@@ -293,7 +293,7 @@ const Detail = () => {
                                         state: {
                                           message:
                                             "It seems like you are not signed in!",
-                                          redirectFlag: true,
+                                          redirectUrl: "/",
                                         },
                                       });
                                 }}
