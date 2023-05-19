@@ -65,6 +65,8 @@ const Home = () => {
   const favs = favsResults?.data?.outcome ?? [];
   //Get refetch funciton to reload favs
   const favsRefetch = favsResults?.refetch;
+  //Get status of fav fetch
+  const favsStatus = favsResults?.status;
 
   return (
     <Container fluid className="content-container">
@@ -151,6 +153,7 @@ const Home = () => {
           <ResultsProduct
             products={products}
             favs={favs}
+            favStatus={favsStatus}
             refetch={favsRefetch}
             prodstatus={status}
             sessionExist={sessionExist}

@@ -5,6 +5,7 @@ import { Row, Col } from "reactstrap";
 const ResultsProduct = ({
   products,
   favs,
+  favStatus,
   refetch,
   prodstatus,
   sessionExist,
@@ -12,6 +13,7 @@ const ResultsProduct = ({
 }) => {
   console.log("products from card", products);
   console.log("prodstatus", prodstatus);
+  console.log("favStatus", favStatus);
 
   const [productsSorted, setProductsSorted] = useState(products);
 
@@ -49,11 +51,12 @@ const ResultsProduct = ({
 
   return (
     <Row className="g-2 my-2">
-      {!products.length && prodstatus == "success" ? (
+      {!products.length && prodstatus == "success" && favStatus == "success" ? (
         <div className="loading-pane">
           <h6 className="">No items found.</h6>
         </div>
-      ) : !products.length && prodstatus == "loading" ? (
+      ) : (!products.length && prodstatus == "loading") ||
+        favStatus == "loading" ? (
         <div className="loading-pane">
           Loading
           <h3 className="loader ms-2">꩜</h3>
