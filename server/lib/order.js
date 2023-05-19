@@ -100,7 +100,7 @@ export const updateOrder = async (
   orderId
 ) => {
   const [response] = await connection.query(
-    "UPDATE `orders` SET delivery_address_id = ?, discount_id = ?, delivery_method_id = ?, payment_id =?, order_status =? WHERE order_id = ?",
+    "UPDATE `orders` SET delivery_address_id = ?, discount_id = ?, delivery_method_id = ?, payment_id =?, order_status =?, order_date=? WHERE order_id = ?",
     [
       deliveryAddressId,
       discountId,

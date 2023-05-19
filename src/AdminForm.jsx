@@ -111,7 +111,7 @@ const AdminForm = () => {
       formFunc: {
         function(formData) {
           //Update row in discount_code table
-          fetch("http://planted.duckdns.org:8080/admin/discount/edit", {
+          fetch("/api/admin/discount/edit", {
             method: "POST",
             credentials: "include",
             body: JSON.stringify(formData),
@@ -132,7 +132,7 @@ const AdminForm = () => {
         function(dbId) {
           const data = { discountId: dbId };
           //create row in discount_code table
-          fetch("http://planted.duckdns.org:8080/admin/discount/del", {
+          fetch("/api/admin/discount/del", {
             method: "POST",
             credentials: "include",
 
@@ -209,7 +209,7 @@ const AdminForm = () => {
       formFunc: {
         function(formData) {
           //create row in discount_code table
-          fetch("http://planted.duckdns.org:8080/admin/discount/add", {
+          fetch("/api/admin/discount/add", {
             method: "POST",
             credentials: "include",
             body: JSON.stringify(formData),
@@ -310,7 +310,7 @@ const AdminForm = () => {
       formFunc: {
         function(formData) {
           //Update row in categories table
-          fetch("http://planted.duckdns.org:8080/admin/category/edit", {
+          fetch("/api/admin/category/edit", {
             method: "POST",
             credentials: "include",
             body: JSON.stringify(formData),
@@ -331,7 +331,7 @@ const AdminForm = () => {
         function(dbId) {
           const data = { categoryId: dbId };
           //create row in categories table
-          fetch("http://planted.duckdns.org:8080/admin/category/del", {
+          fetch("/api/admin/category/del", {
             method: "POST",
             credentials: "include",
 
@@ -407,7 +407,7 @@ const AdminForm = () => {
       formFunc: {
         function(formData) {
           //Update row in categories table
-          fetch("http://planted.duckdns.org:8080/admin/category/add", {
+          fetch("/api/admin/category/add", {
             method: "POST",
             credentials: "include",
             body: formData,
@@ -535,7 +535,7 @@ const AdminForm = () => {
       formFunc: {
         function(formData) {
           //Update row in categories table
-          fetch("http://planted.duckdns.org:8080/admin/product/add", {
+          fetch("/api/admin/product/add", {
             method: "POST",
             credentials: "include",
             body: formData,
@@ -690,7 +690,7 @@ const AdminForm = () => {
       formFunc: {
         function(formData) {
           //Update row in product table
-          fetch("http://planted.duckdns.org:8080/admin/product/edit", {
+          fetch("/api/admin/product/edit", {
             method: "POST",
             credentials: "include",
             body: JSON.stringify(formData),
@@ -711,7 +711,7 @@ const AdminForm = () => {
         function(dbId) {
           const data = { productId: dbId };
           //create row in categories table
-          fetch("http://planted.duckdns.org:8080/admin/product/del", {
+          fetch("/api/admin/product/del", {
             method: "POST",
             credentials: "include",
 

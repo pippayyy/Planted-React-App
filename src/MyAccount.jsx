@@ -99,7 +99,7 @@ const MyAccount = () => {
                         <Row className="">
                           <Col xs="12" className="">
                             <CardIconText
-                              title={"ORDER ID " + item.order_number}
+                              title={"ORDER ID " + "PLANTED#" + item.order_id}
                               descrip={
                                 <span>
                                   Status: <strong>{item.order_status}</strong>

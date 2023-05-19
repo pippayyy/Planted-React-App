@@ -202,7 +202,7 @@ app.post(
   "/api/admin/product/add",
   uploadImages.single("image"),
   async (req, res) => {
-    //Get current datetie
+    //Get current datetime
     var date = new Date();
     var dateStr =
       date.getFullYear() +
@@ -807,6 +807,21 @@ app.post("/api/order/placeorder", async (req, res) => {
     req.body.paymentTotal
   );
 
+  //Get current datetime
+  var date = new Date();
+  var dateStr =
+    date.getFullYear() +
+    "-" +
+    ("00" + (date.getMonth() + 1)).slice(-2) +
+    "-" +
+    ("00" + date.getDate()).slice(-2) +
+    " " +
+    ("00" + date.getHours()).slice(-2) +
+    ":" +
+    ("00" + date.getMinutes()).slice(-2) +
+    ":" +
+    ("00" + date.getSeconds()).slice(-2);
+
   //Add detail to orders table - add order date and change order_status to Ordered
   const orderDetail = await updateOrder(
     deliveryAddressId.insertId,
@@ -814,7 +829,8 @@ app.post("/api/order/placeorder", async (req, res) => {
     req.body.deliveryMethodId,
     paymentId.insertId,
     "Ordered",
-    req.body.orderId
+    req.body.orderId,
+    dateStr
   );
 
   res.json({
