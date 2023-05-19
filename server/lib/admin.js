@@ -97,11 +97,25 @@ export const addProduct = async (
   img,
   qty,
   price,
-  discount
+  discount,
+  dateCurrent,
+  userId
 ) => {
   const [response] = await connection.query(
-    "INSERT INTO `product` (name,category_id,description,img,stock,price,discount_percent) VALUES (?,?,?,?,?,?,?)",
-    [name, category, descrip, img, qty, price, discount],
+    "INSERT INTO `product` (name,category_id,description,img,stock,price,discount_percent,created_on,created_by,modified_on,modified_by) VALUES (?,?,?,?,?,?,?,?,?,?,?)",
+    [
+      name,
+      category,
+      descrip,
+      img,
+      qty,
+      price,
+      discount,
+      dateCurrent,
+      userId,
+      dateCurrent,
+      userId,
+    ],
     (error, res) => {
       if (error) return res.json({ error: error });
     }

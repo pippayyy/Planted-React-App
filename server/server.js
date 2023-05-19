@@ -51,19 +51,6 @@ import {
 } from "./lib/admin.js";
 import multer from "multer";
 import fs from "fs";
-// import MySQLStore from "express-mysql-session";
-
-// const MySQLStoreSession = MySQLStore(session);
-
-// const options = {
-//   host: process.env.DB_HOST,
-//   user: process.env.DB_USER,
-//   password: process.env.DB_PASS,
-//   database: process.env.DB_NAME,
-//   port: "3306",
-// };
-
-// const sessionStore = new MySQLStoreSession(options);
 
 const app = express();
 
@@ -99,23 +86,8 @@ app.use(
     secret: process.env.SESSION_KEY,
     resave: false,
     saveUninitialized: false,
-    // key: "session_cookie_name",
-    // store: sessionStore,
   })
 );
-
-// Optionally use onReady() to get a promise that resolves when store is ready.
-// sessionStore
-//   .onReady()
-//   .then(() => {
-//     // MySQL session store ready for use.
-//     console.log("PIP MySQLStore ready");
-//   })
-//   .catch((error) => {
-//     // Something went wrong.
-//     console.log("PIP MySQLStore not ready");
-//     console.error(error);
-//   });
 
 //Storage used for image upload - admin functionality
 const storageIcons = multer.diskStorage({
@@ -123,8 +95,6 @@ const storageIcons = multer.diskStorage({
     cb(null, "../src/images/icons");
   },
   filename: (req, file, cb) => {
-    console.log("file name: ", file);
-    console.log("file originalname: ", file.originalname);
     cb(null, Date.now() + file.originalname);
   },
 });
@@ -138,8 +108,6 @@ const storageImages = multer.diskStorage({
     cb(null, "../src/images");
   },
   filename: (req, file, cb) => {
-    console.log("file name: ", file);
-    console.log("file originalname: ", file.originalname);
     cb(null, Date.now() + file.originalname);
   },
 });
@@ -234,6 +202,21 @@ app.post(
   "/api/admin/product/add",
   uploadImages.single("image"),
   async (req, res) => {
+    //Get current datetie
+    var date = new Date();
+    var dateStr =
+      date.getFullYear() +
+      "-" +
+      ("00" + (date.getMonth() + 1)).slice(-2) +
+      "-" +
+      ("00" + date.getDate()).slice(-2) +
+      " " +
+      ("00" + date.getHours()).slice(-2) +
+      ":" +
+      ("00" + date.getMinutes()).slice(-2) +
+      ":" +
+      ("00" + date.getSeconds()).slice(-2);
+
     //Check if code already exists
     const productAddedResponse = await addProduct(
       req.body.productName,
@@ -242,7 +225,9 @@ app.post(
       "../images/" + req.file.filename,
       req.body.productQty,
       req.body.productPrice,
-      req.body.discountPerc
+      req.body.discountPerc,
+      dateStr,
+      req.session.userId
     );
 
     if (productAddedResponse.affectedRows > 0) {
@@ -291,13 +276,6 @@ app.post("/api/admin/product/edit", async (req, res) => {
 
 //Used to add new discounts
 app.post("/api/admin/discount/add", async (req, res) => {
-  console.log(
-    "vars: ",
-    req.body.discountCode,
-    req.body.discountValue,
-    req.body.discountStatus
-  );
-
   //Check if code already exists
   const validDiscountDetails = await getDiscount(req.body.discountCode);
 
@@ -332,7 +310,6 @@ app.post("/api/admin/discount/add", async (req, res) => {
 
 //Del discount
 app.post("/api/admin/discount/del", async (req, res) => {
-  console.log("discountId: ", req.body.discountId);
   //Del discount code
   const delResponse = await delDiscount(req.body.discountId);
 
@@ -419,7 +396,6 @@ app.post(
   "/api/admin/category/add",
   uploadIcons.single("image"),
   async (req, res) => {
-    console.log("req: ", req);
     //Check if category already exists
     const validCategoryDetails = await getCategory(req.body.categoryName);
 
@@ -483,8 +459,6 @@ app.post("/api/admin/discount/edit", async (req, res) => {
 
 //Update discount code detail
 app.post("/api/admin/category/edit", async (req, res) => {
-  console.log("req: ", req);
-
   //Update discount details
   const updateResponse = await updateCategory(
     req.body.dbId,
@@ -492,16 +466,6 @@ app.post("/api/admin/category/edit", async (req, res) => {
     req.body.categoryImage,
     req.body.categoryStatus
   );
-
-  console.log(
-    "pip vars: ",
-    req.body.dbId,
-    req.body.categoryName,
-    req.body.categoryImage,
-    req.body.categoryStatus
-  );
-
-  console.log("pip updateResponse: ", updateResponse);
 
   //Check if updated
   if (updateResponse.affectedRows > 0) {
@@ -524,9 +488,6 @@ app.post("/api/admin/category/edit", async (req, res) => {
 //Used for sign in
 app.post("/api/signin", async (req, res) => {
   const validUserDetails = await getCustomer(req.body.userEmail);
-
-  console.log("req.session.id:", req.session.id);
-  console.log("session:", req.session);
 
   //Check if valid user
   if (validUserDetails.length > 0) {
@@ -576,20 +537,15 @@ app.get("/api/getsession", function (req, res) {
     },
   ];
 
-  console.log("req.session.id:", req.session.id);
-  console.log("session:", req.session);
-
   res.json({ sessionData: sessionDetails });
 });
 
 // Check if session exists
 app.get("/api/checksession", (req, res) => {
   if (req.session && req.session.userId) {
-    console.log("checksession - exists");
     res.json({ outcome: { message: "success" } });
   } else {
     res.json({ outcome: { message: "failed" } });
-    console.log("checksession - does not exist");
   }
 });
 
@@ -598,23 +554,13 @@ app.get("/api/checksession/admin", async (req, res) => {
   if (req.session && req.session.userId) {
     const validUserDetails = await getCustomerById(req.session.userId);
 
-    console.log(
-      "checksession/admin validUserDetails[0].admin : ",
-      validUserDetails[0].admin
-    );
-
     if (validUserDetails.length > 0 && validUserDetails[0].admin == 1) {
-      console.log("checksession/admin checksession - exists");
       res.json({ outcome: { message: "success" } });
     } else {
       res.json({ outcome: { message: "failed" } });
-      console.log(
-        "checksession/admin checksession - user does not have admin priv"
-      );
     }
   } else {
     res.json({ outcome: { message: "failed" } });
-    console.log("checksession/admin checksession - does not exist");
   }
 });
 
@@ -694,7 +640,6 @@ app.get("/api/products/:id", async (req, res) => {
 
 //Check if 'Active' row in orders table for a specific customer
 app.post("/api/order/checkactiveorders", async (req, res) => {
-  console.log("req.session.userId: ", req.session.userId);
   const activeOrdersForCust = await getOrderForCust(
     req.session.userId,
     "Basket"
@@ -706,9 +651,6 @@ app.post("/api/order/checkactiveorders", async (req, res) => {
 //Get basket details for customer - one row per product in basket - includes product details
 app.post("/api/order/getbasket/orderstatus/:orderstatus", async (req, res) => {
   if (req.session && req.session.userId) {
-    console.log("in get basket api");
-    console.log("req.session.userId", req.session.userId);
-    console.log("req.params.orderstatus", req.params.orderstatus);
     const activeOrdersForCust = await getBasket(
       req.session.userId,
       req.params.orderstatus
@@ -723,8 +665,6 @@ app.post("/api/order/getbasket/orderstatus/:orderstatus", async (req, res) => {
 app.post(
   "/api/order/checkactiveorders/product/:productid",
   async (req, res) => {
-    console.log("req.session.userId: ", req.session.userId);
-    console.log("req.params.productid: ", req.params.productid);
     const activeOrdersForCust = await getOrderForCustProd(
       req.session.userId,
       "Basket",
@@ -759,7 +699,6 @@ app.post(
       ("00" + date.getMinutes()).slice(-2) +
       ":" +
       ("00" + date.getSeconds()).slice(-2);
-    console.log(dateStr);
 
     const outcome = await postNewOrderDetails(
       req.params.orderid,
@@ -788,7 +727,6 @@ app.post(
       ("00" + date.getMinutes()).slice(-2) +
       ":" +
       ("00" + date.getSeconds()).slice(-2);
-    console.log(dateStr);
 
     //If product qty in basket set to zero, remove it from the bag
     if (req.params.productqty == 0) {
@@ -1058,7 +996,7 @@ app.post("/api/order/placeorder", async (req, res) => {
                               </tr>
                                   ${
                                     OrderDetailsActive[0].discount_id == null
-                                      ? `&nbsp`
+                                      ? ""
                                       : `<tr>
                                         <td
                                           width="75%"
@@ -1184,7 +1122,6 @@ app.post("/api/order/placeorder", async (req, res) => {
 
 //Get customer's favs
 app.get("/api/favourties", async (req, res) => {
-  console.log("req.session: ", req.session.userId ? req.session.userId : null);
   const favs = await getFavs(req.session.userId ? req.session.userId : null);
 
   res.json({ outcome: favs });
