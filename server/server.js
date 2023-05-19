@@ -276,6 +276,21 @@ app.post("/api/admin/product/edit", async (req, res) => {
 
 //Used to add new discounts
 app.post("/api/admin/discount/add", async (req, res) => {
+  //Get current datetime
+  var date = new Date();
+  var dateStr =
+    date.getFullYear() +
+    "-" +
+    ("00" + (date.getMonth() + 1)).slice(-2) +
+    "-" +
+    ("00" + date.getDate()).slice(-2) +
+    " " +
+    ("00" + date.getHours()).slice(-2) +
+    ":" +
+    ("00" + date.getMinutes()).slice(-2) +
+    ":" +
+    ("00" + date.getSeconds()).slice(-2);
+
   //Check if code already exists
   const validDiscountDetails = await getDiscount(req.body.discountCode);
 
@@ -292,7 +307,9 @@ app.post("/api/admin/discount/add", async (req, res) => {
     const dicountAddedResponse = await addDiscount(
       req.body.discountCode,
       req.body.discountValue,
-      req.body.discountStatus
+      req.body.discountStatus,
+      dateStr,
+      req.session.userId
     );
 
     if (dicountAddedResponse.affectedRows > 0) {

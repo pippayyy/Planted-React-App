@@ -9,10 +9,16 @@ export const getDiscount = async (discountCode) => {
   return discount;
 };
 
-export const addDiscount = async (code, value, status) => {
+export const addDiscount = async (
+  code,
+  value,
+  status,
+  statusdateCurrent,
+  userId
+) => {
   const [response] = await connection.query(
-    "INSERT INTO `discount_code` (discount_code,discount_value,discount_status) VALUES (?,?,?)",
-    [code, value, status],
+    "INSERT INTO `discount_code` (discount_code,discount_value,discount_status,created_on,created_by,modified_on,modified_by) VALUES (?,?,?,?,?,?,?)",
+    [code, value, status, statusdateCurrent, userId, statusdateCurrent, userId],
     (error, res) => {
       if (error) return res.json({ error: error });
     }
