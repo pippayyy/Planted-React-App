@@ -375,7 +375,11 @@ app.post("/api/admin/category/del", async (req, res) => {
 
   const imgUrl = categoryImgPath[0].img;
 
-  fs.unlinkSync("../src" + imgUrl.slice(2));
+  try {
+    fs.unlinkSync("src/dist" + imgUrl.slice(2));
+  } catch (err) {
+    console.log(err.message);
+  }
 
   //Check if updated
   if (delResponse.affectedRows > 0) {
@@ -405,7 +409,11 @@ app.post("/api/admin/product/del", async (req, res) => {
 
   const imgUrl = prodImgPath[0].img;
 
-  fs.unlinkSync("../src" + imgUrl.slice(2));
+  try {
+    fs.unlinkSync("src/dist" + imgUrl.slice(2));
+  } catch (err) {
+    console.log(err.message);
+  }
 
   //Check if updated
   if (delResponse.affectedRows > 0) {
