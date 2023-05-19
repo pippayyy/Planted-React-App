@@ -445,6 +445,10 @@ app.post(
       ":" +
       ("00" + date.getSeconds()).slice(-2);
 
+    console.log("req.file.filename : ", req.file.filename);
+    console.log("dateStr : ", dateStr);
+    console.log("req.session.userId : ", req.session.userId);
+
     //Check if category already exists
     const validCategoryDetails = await getCategory(req.body.categoryName);
 
