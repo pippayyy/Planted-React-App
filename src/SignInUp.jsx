@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { CheckCircle, ExclamationCircle } from "react-bootstrap-icons";
-import { NavLink, redirect } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import {
   Container,
   Row,
@@ -84,7 +84,7 @@ const SignInup = () => {
   }
 
   //Use Navigate to go back to prev section
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
   useEffect(() => {
     //Check if logged in worked, then nav away
@@ -92,7 +92,8 @@ const SignInup = () => {
       ? setTimeout(() => {
           // After 1.5 seconds, navigate away
           // !redirectFlag ? navigate(-1) : navigate(-2);
-          redirect("/");
+          location.reload();
+          navigate("/");
         }, 1500)
       : null;
   }, [authOutcome]);
