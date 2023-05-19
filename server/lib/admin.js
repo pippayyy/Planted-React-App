@@ -52,10 +52,17 @@ export const delDiscount = async (discountId) => {
   return response;
 };
 
-export const updateCategory = async (categoryid, name, img, status) => {
+export const updateCategory = async (
+  categoryid,
+  name,
+  img,
+  status,
+  dateCurrent,
+  userId
+) => {
   const [response] = await connection.query(
-    "UPDATE `categories` SET name = ?, img = ?, status_active = ? WHERE id = ?",
-    [name, img, status, categoryid],
+    "UPDATE `categories` SET name = ?, img = ?, status_active = ?, created_on = ?,created_by = ?,modified_on = ?,modified_by = ? WHERE id = ?",
+    [name, img, status, dateCurrent, userId, dateCurrent, userId, categoryid],
     (error, res) => {
       if (error) return res.json({ error: error });
     }
@@ -73,10 +80,10 @@ export const getCategory = async (categoryName) => {
   return discount;
 };
 
-export const addCategory = async (name, status, img) => {
+export const addCategory = async (name, status, img, dateCurrent, userId) => {
   const [response] = await connection.query(
-    "INSERT INTO `categories` (name,status_active,img) VALUES (?,?,?)",
-    [name, status, img],
+    "INSERT INTO `categories` (name,status_active,img,created_on,created_by,modified_on,modified_by) VALUES (?,?,?,?,?,?,?)",
+    [name, status, img, dateCurrent, userId, dateCurrent, userId],
     (error, res) => {
       if (error) return res.json({ error: error });
     }
@@ -138,11 +145,25 @@ export const updateProduct = async (
   descrip,
   qty,
   price,
-  discount
+  discount,
+  dateCurrent,
+  userId
 ) => {
   const [response] = await connection.query(
-    "UPDATE `product` SET name = ?, category_id = ?, description = ?, stock = ?, price = ?, discount_percent = ? WHERE product_id = ?",
-    [name, category, descrip, qty, price, discount, id],
+    "UPDATE `product` SET name = ?, category_id = ?, description = ?, stock = ?, price = ?, discount_percent = ? created_on = ?,created_by = ?,modified_on = ?,modified_by =? WHERE product_id = ?",
+    [
+      name,
+      category,
+      descrip,
+      qty,
+      price,
+      discount,
+      dateCurrent,
+      userId,
+      dateCurrent,
+      userId,
+      id,
+    ],
     (error, res) => {
       if (error) return res.json({ error: error });
     }

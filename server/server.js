@@ -245,6 +245,21 @@ app.post(
 
 //Update discount code detail
 app.post("/api/admin/product/edit", async (req, res) => {
+  //Get current datetime
+  var date = new Date();
+  var dateStr =
+    date.getFullYear() +
+    "-" +
+    ("00" + (date.getMonth() + 1)).slice(-2) +
+    "-" +
+    ("00" + date.getDate()).slice(-2) +
+    " " +
+    ("00" + date.getHours()).slice(-2) +
+    ":" +
+    ("00" + date.getMinutes()).slice(-2) +
+    ":" +
+    ("00" + date.getSeconds()).slice(-2);
+
   //Update discount details
   const updateResponse = await updateProduct(
     req.body.dbId,
@@ -253,7 +268,9 @@ app.post("/api/admin/product/edit", async (req, res) => {
     req.body.productDescrip,
     req.body.productQty,
     req.body.productPrice,
-    req.body.discountPerc
+    req.body.discountPerc,
+    dateStr,
+    req.session.userId
   );
 
   //Check if updated
@@ -413,6 +430,21 @@ app.post(
   "/api/admin/category/add",
   uploadIcons.single("image"),
   async (req, res) => {
+    //Get current datetime
+    var date = new Date();
+    var dateStr =
+      date.getFullYear() +
+      "-" +
+      ("00" + (date.getMonth() + 1)).slice(-2) +
+      "-" +
+      ("00" + date.getDate()).slice(-2) +
+      " " +
+      ("00" + date.getHours()).slice(-2) +
+      ":" +
+      ("00" + date.getMinutes()).slice(-2) +
+      ":" +
+      ("00" + date.getSeconds()).slice(-2);
+
     //Check if category already exists
     const validCategoryDetails = await getCategory(req.body.categoryName);
 
@@ -429,7 +461,9 @@ app.post(
       const categoryAddedResponse = await addCategory(
         req.body.categoryName,
         req.body.categoryStatus,
-        "../images/icons/" + req.file.filename
+        "../images/icons/" + req.file.filename,
+        dateStr,
+        req.session.userId
       );
 
       if (categoryAddedResponse.affectedRows > 0) {
@@ -448,12 +482,29 @@ app.post(
 
 //Update discount code detail
 app.post("/api/admin/discount/edit", async (req, res) => {
+  //Get current datetime
+  var date = new Date();
+  var dateStr =
+    date.getFullYear() +
+    "-" +
+    ("00" + (date.getMonth() + 1)).slice(-2) +
+    "-" +
+    ("00" + date.getDate()).slice(-2) +
+    " " +
+    ("00" + date.getHours()).slice(-2) +
+    ":" +
+    ("00" + date.getMinutes()).slice(-2) +
+    ":" +
+    ("00" + date.getSeconds()).slice(-2);
+
   //Update discount details
   const updateResponse = await updateDiscount(
     req.body.dbId,
     req.body.discountCode,
     req.body.discountValue,
-    req.body.discountStatus
+    req.body.discountStatus,
+    dateStr,
+    req.session.userId
   );
 
   //Check if updated
@@ -476,12 +527,29 @@ app.post("/api/admin/discount/edit", async (req, res) => {
 
 //Update discount code detail
 app.post("/api/admin/category/edit", async (req, res) => {
+  //Get current datetime
+  var date = new Date();
+  var dateStr =
+    date.getFullYear() +
+    "-" +
+    ("00" + (date.getMonth() + 1)).slice(-2) +
+    "-" +
+    ("00" + date.getDate()).slice(-2) +
+    " " +
+    ("00" + date.getHours()).slice(-2) +
+    ":" +
+    ("00" + date.getMinutes()).slice(-2) +
+    ":" +
+    ("00" + date.getSeconds()).slice(-2);
+
   //Update discount details
   const updateResponse = await updateCategory(
     req.body.dbId,
     req.body.categoryName,
     req.body.categoryImage,
-    req.body.categoryStatus
+    req.body.categoryStatus,
+    dateStr,
+    req.session.userId
   );
 
   //Check if updated
