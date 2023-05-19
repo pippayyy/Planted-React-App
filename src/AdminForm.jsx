@@ -76,7 +76,7 @@ const AdminForm = () => {
           formId: "discountValue",
           fieldName: "Discount Percentage",
           fieldType: "text",
-          fieldHintText: "Number 1-100",
+          fieldHintText: "Number 0-100",
           fieldReq: true,
           fieldDisabled: false,
           submitInForm: true,
