@@ -21,6 +21,7 @@ const Home = () => {
 
   //Refetch session on page load to ensure correct session status is set
   useEffect(() => {
+    location.reload();
     sessionRefetch();
     favsRefetch();
   });

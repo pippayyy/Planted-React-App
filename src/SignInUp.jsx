@@ -92,7 +92,6 @@ const SignInup = () => {
       ? setTimeout(() => {
           // After 1.5 seconds, navigate away
           // !redirectFlag ? navigate(-1) : navigate(-2);
-          location.reload();
           navigate("/");
         }, 1500)
       : null;
