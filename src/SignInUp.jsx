@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { CheckCircle, ExclamationCircle } from "react-bootstrap-icons";
-import { Link, NavLink, useLocation } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import {
   Container,
   Row,
@@ -202,7 +202,7 @@ const SignInup = () => {
                             <Col xs="12" className="mb-2">
                               <a
                                 href={redirectUrl}
-                                className="btn button-colour block border-0 text-black rounded-4 d-flex justify-content-center align-items-center py-3"
+                                className="btn button-colour-subtle block border-0 text-black rounded-4 d-flex justify-content-center align-items-center py-3"
                               >
                                 <h5 className="m-0">Continue</h5>
                               </a>
@@ -305,7 +305,7 @@ const SignInup = () => {
                             <Col xs="12" className="mb-2">
                               <a
                                 href={redirectUrl}
-                                className="btn button-colour block border-0 text-black rounded-4 d-flex justify-content-center align-items-center py-3"
+                                className="btn button-colour-subtle block border-0 text-black rounded-4 d-flex justify-content-center align-items-center py-3"
                               >
                                 <h5 className="m-0">Continue</h5>
                               </a>

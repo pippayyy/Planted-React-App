@@ -29,7 +29,7 @@ const MyAccount = () => {
         console.log("response:", response.outcome);
         //If logout successful
         if (response.outcome.message == "success") {
-          navigate("/", {});
+          location.reload();
         }
       });
   }

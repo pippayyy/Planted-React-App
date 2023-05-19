@@ -81,7 +81,7 @@ function AdminRoute({ component: Component, altpath: Altpath, ...rest }) {
           to={Altpath}
           state={{
             message: "You don't have admin permissions, sorry!",
-            redirectUrl: "/admin",
+            redirectUrl: "/#/admin",
           }}
         />
       );

@@ -84,17 +84,17 @@ const NavbarMobile = () => {
       <Nav className="nav navbar-nav navbar-right justify-content-end" navbar>
         <ul className="p-0">
           <li className="text-white" href="#">
-            <a href="/account`" className="category-button text-white">
+            <a href="/#/account`" className="category-button text-white">
               <Person className="fs-3" />
             </a>
           </li>
           <li className="text-white" href="#">
-            <a href="/favourites" className="category-button text-white">
+            <a href="/#/favourites" className="category-button text-white">
               <Heart className="fs-3" />
             </a>
           </li>
           <li className="text-white" href="#">
-            <a href="/bag" className="category-button text-white">
+            <a href="/#/bag" className="category-button text-white">
               <Bag className="fs-3" />
             </a>
           </li>
