@@ -87,10 +87,7 @@ const SignInup = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // run something every time name changes
-    console.log("authOutcome.status: ", authOutcome.status);
-    console.log("redirectFlag: ", redirectFlag);
-    console.log("!redirectFlag: ", !redirectFlag);
+    //Check if logged in worked, then nav away
     authOutcome.status == "success"
       ? setTimeout(() => {
           // After 3 seconds, navigate away

@@ -98,7 +98,10 @@ const Detail = () => {
         : sessionExist == "success"
         ? addFav(products[0]["product_id"], favsRefetch)
         : navigate("/oops", {
-            state: { message: "It seems like you are not signed in!" },
+            state: {
+              message: "It seems like you are not signed in!",
+              redirectFlag: true,
+            },
           })
       : null;
   };
@@ -290,6 +293,7 @@ const Detail = () => {
                                         state: {
                                           message:
                                             "It seems like you are not signed in!",
+                                          redirectFlag: true,
                                         },
                                       });
                                 }}
