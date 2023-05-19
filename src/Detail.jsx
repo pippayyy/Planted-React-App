@@ -36,11 +36,6 @@ const Detail = () => {
   const { prodId } = location.state;
   const productSelected = prodId.id;
 
-  //Refetch session on page load to ensure correct session status is set
-  useEffect(() => {
-    sessionRefetch();
-  }, [sessionRefetch]);
-
   //Check if session exists
   const sessionResults = useQuery(["getSessionDetail"], fetchSession, 0, {
     retry: false,
@@ -49,6 +44,11 @@ const Detail = () => {
   const sessionExist = sessionResults?.data?.outcome?.message ?? [];
   const sessionFetchStatus = sessionResults?.status ?? "loading";
   const sessionRefetch = sessionResults?.refetch;
+
+  //Refetch session on page load to ensure correct session status is set
+  useEffect(() => {
+    sessionRefetch();
+  }, [sessionRefetch]);
 
   //Get products json based on product selected on prev page
   const [products, status] = useFetchProduct(productSelected);

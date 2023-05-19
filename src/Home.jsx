@@ -11,11 +11,6 @@ import fetchFavs from "./fetchFavs";
 import fetchSession from "./fetchSession";
 
 const Home = () => {
-  //Refetch session on page load to ensure correct session status is set
-  useEffect(() => {
-    sessionRefetch();
-  }, [sessionRefetch]);
-
   //Check if session exists
   const sessionResults = useQuery(["getSessionDetail"], fetchSession, 0, {
     retry: false,
@@ -23,6 +18,11 @@ const Home = () => {
   //Get status of session
   const sessionExist = sessionResults?.data?.outcome?.message ?? [];
   const sessionRefetch = sessionResults?.refetch;
+
+  //Refetch session on page load to ensure correct session status is set
+  useEffect(() => {
+    sessionRefetch();
+  }, [sessionRefetch]);
 
   //Used to get category data and populate category sections
   const resultsCategories = useQuery(["getCategories"], fetchCategoryActive);
