@@ -21,9 +21,10 @@ const Home = () => {
 
   //Refetch session on page load to ensure correct session status is set
   useEffect(() => {
-    location.reload();
     sessionRefetch();
     favsRefetch();
+    refetch();
+    console.log("in use effect");
   });
 
   //Used to get category data and populate category sections
@@ -33,7 +34,7 @@ const Home = () => {
   //Used to get product data and populate product items
   const [activeSection, setActiveSection] = useState("buttNewArrivals");
   //const [products] = useFetchProduct(activeSection);
-  const [products, status] = useFetchProduct(activeSection);
+  const [products, status, refetch] = useFetchProduct(activeSection);
 
   const [activeNewArrivals, setActiveNewArrivals] =
     useState("active px-0 pb-0"); // assumes link 1 is default active
