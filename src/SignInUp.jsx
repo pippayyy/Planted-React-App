@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { CheckCircle, ExclamationCircle } from "react-bootstrap-icons";
-import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
+import { Link, NavLink, useLocation } from "react-router-dom";
 import {
   Container,
   Row,
@@ -200,17 +200,12 @@ const SignInup = () => {
                           </Col>
                           {continueButtonVis ? (
                             <Col xs="12" className="mb-2">
-                              <Link
-                                to={redirectUrl}
-                                className="category-button"
+                              <a
+                                href={redirectUrl}
+                                className="btn button-colour block border-0 text-black rounded-4 d-flex justify-content-center align-items-center py-3"
                               >
-                                <Button
-                                  block
-                                  className="button-colour border-0 text-black rounded-4 d-flex justify-content-center align-items-center py-3"
-                                >
-                                  <h5 className="m-0">Continue</h5>
-                                </Button>
-                              </Link>
+                                <h5 className="m-0">Continue</h5>
+                              </a>
                             </Col>
                           ) : null}
                         </Form>
@@ -308,17 +303,12 @@ const SignInup = () => {
                           </Col>
                           {continueButtonVis ? (
                             <Col xs="12" className="mb-2">
-                              <Link
-                                to={redirectUrl}
-                                className="category-button"
+                              <a
+                                href={redirectUrl}
+                                className="btn button-colour block border-0 text-black rounded-4 d-flex justify-content-center align-items-center py-3"
                               >
-                                <Button
-                                  block
-                                  className="button-colour border-0 text-black rounded-4 d-flex justify-content-center align-items-center py-3"
-                                >
-                                  <h5 className="m-0">Continue</h5>
-                                </Button>
-                              </Link>
+                                <h5 className="m-0">Continue</h5>
+                              </a>
                             </Col>
                           ) : null}
                         </Form>
