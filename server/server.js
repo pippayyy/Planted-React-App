@@ -747,13 +747,24 @@ app.post(
   "/api/orderdetails/add/order/:orderid/product/:productid",
   async (req, res) => {
     var date = new Date();
-
-    console.log("date.toISOString() : ", date.toISOString());
+    var dateStr =
+      ("00" + (date.getMonth() + 1)).slice(-2) +
+      "-" +
+      ("00" + date.getDate()).slice(-2) +
+      "-" +
+      date.getFullYear() +
+      " " +
+      ("00" + date.getHours()).slice(-2) +
+      ":" +
+      ("00" + date.getMinutes()).slice(-2) +
+      ":" +
+      ("00" + date.getSeconds()).slice(-2);
+    console.log(dateStr);
 
     const outcome = await postNewOrderDetails(
       req.params.orderid,
       req.params.productid,
-      date.toISOString()
+      dateStr
     );
 
     res.json({ outcome: outcome });
@@ -765,7 +776,19 @@ app.post(
   "/api/orderdetails/update/order/:orderid/product/:productid/productqty/:productqty",
   async (req, res) => {
     var date = new Date();
-    console.log("date.toISOString() : ", date.toISOString());
+    var dateStr =
+      ("00" + (date.getMonth() + 1)).slice(-2) +
+      "-" +
+      ("00" + date.getDate()).slice(-2) +
+      "-" +
+      date.getFullYear() +
+      " " +
+      ("00" + date.getHours()).slice(-2) +
+      ":" +
+      ("00" + date.getMinutes()).slice(-2) +
+      ":" +
+      ("00" + date.getSeconds()).slice(-2);
+    console.log(dateStr);
 
     //If product qty in basket set to zero, remove it from the bag
     if (req.params.productqty == 0) {
@@ -779,7 +802,7 @@ app.post(
         req.params.orderid,
         req.params.productid,
         req.params.productqty,
-        date.toISOString()
+        dateStr
       );
       res.json({ outcome: outcome });
     }
