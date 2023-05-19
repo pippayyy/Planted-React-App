@@ -694,6 +694,7 @@ app.get("/api/products/:id", async (req, res) => {
 
 //Check if 'Active' row in orders table for a specific customer
 app.post("/api/order/checkactiveorders", async (req, res) => {
+  console.log("req.session.userId: ", req.session.userId);
   const activeOrdersForCust = await getOrderForCust(
     req.session.userId,
     "Basket"
