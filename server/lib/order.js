@@ -97,7 +97,8 @@ export const updateOrder = async (
   deliveryMethodId,
   paymentId,
   orderStatus,
-  orderId
+  orderId,
+  dateCurrent
 ) => {
   const [response] = await connection.query(
     "UPDATE `orders` SET delivery_address_id = ?, discount_id = ?, delivery_method_id = ?, payment_id =?, order_status =?, order_date=? WHERE order_id = ?",
@@ -107,6 +108,7 @@ export const updateOrder = async (
       deliveryMethodId,
       paymentId,
       orderStatus,
+      dateCurrent,
       orderId,
     ],
     (error, res) => {
