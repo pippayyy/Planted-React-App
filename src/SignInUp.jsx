@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { CheckCircle, ExclamationCircle } from "react-bootstrap-icons";
-import { NavLink, useLocation, useNavigate } from "react-router-dom";
+import { NavLink, redirect } from "react-router-dom";
 import {
   Container,
   Row,
@@ -19,8 +19,8 @@ import {
 
 const SignInup = () => {
   //Check if redirected to this page
-  const location = useLocation();
-  const { redirectFlag } = location.state ?? false;
+  // const location = useLocation();
+  // const { redirectFlag } = location.state ?? false;
 
   //Set default value for selected section
   const [selectedSection, setSelectedSection] = useState(1);
@@ -84,14 +84,15 @@ const SignInup = () => {
   }
 
   //Use Navigate to go back to prev section
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   useEffect(() => {
     //Check if logged in worked, then nav away
     authOutcome.status == "success"
       ? setTimeout(() => {
-          // After 3 seconds, navigate away
-          !redirectFlag ? navigate(-1) : navigate(-2);
+          // After 1.5 seconds, navigate away
+          // !redirectFlag ? navigate(-1) : navigate(-2);
+          redirect("/");
         }, 1500)
       : null;
   }, [authOutcome]);
