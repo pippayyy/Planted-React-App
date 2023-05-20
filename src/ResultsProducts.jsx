@@ -10,6 +10,8 @@ const ResultsProduct = ({
   prodstatus,
   sessionExist,
   sortProducts,
+  offset,
+  perPage,
 }) => {
   const [productsSorted, setProductsSorted] = useState(products);
 
@@ -19,25 +21,31 @@ const ResultsProduct = ({
         //Sort by created date
         setProductsSorted(
           products.sort(
-            (a, b) => parseFloat(b.product_id) - parseFloat(a.product_id)
+            (a, b) =>
+              parseFloat(b.product_id) -
+              parseFloat(a.product_id).slice(offset, offset + perPage)
           )
         );
         break;
       case "priceAsc":
         //Sort by price ascending
         setProductsSorted(
-          products.sort((a, b) => parseFloat(a.price) - parseFloat(b.price))
+          products
+            .sort((a, b) => parseFloat(a.price) - parseFloat(b.price))
+            .slice(offset, offset + perPage)
         );
         break;
       case "priceDesc":
         //Sort by price descending
         setProductsSorted(
-          products.sort((a, b) => parseFloat(b.price) - parseFloat(a.price))
+          products
+            .sort((a, b) => parseFloat(b.price) - parseFloat(a.price))
+            .slice(offset, offset + perPage)
         );
         break;
       default:
         //Default - no sort
-        setProductsSorted(products);
+        setProductsSorted(products.slice(offset, offset + perPage));
     }
     console.log("productsSorted in effect ", productsSorted);
   }, [sortProducts, products]);

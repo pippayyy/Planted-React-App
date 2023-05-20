@@ -75,16 +75,17 @@ const Shop = () => {
   const favsRefetch = favsResults?.refetch;
 
   //pagination stuff
+  // eslint-disable-next-line no-unused-vars
   const [currentPage, setCurrentPage] = useState(0);
+  const [offset, setOffset] = useState(0);
 
   const PER_PAGE = 5;
-  const offset = currentPage * PER_PAGE;
-  const currentPageData = products.slice(offset, offset + PER_PAGE);
 
   const pageCount = Math.ceil(products.length / PER_PAGE);
 
   function handlePageClick({ selected: selectedPage }) {
     setCurrentPage(selectedPage);
+    setOffset(selectedPage * PER_PAGE);
   }
 
   return (
@@ -148,12 +149,14 @@ const Shop = () => {
             activeClassName={"pagination__link--active"}
           />
           <ResultsProduct
-            products={currentPageData}
+            products={products}
             favs={favs}
             refetch={favsRefetch}
             prodstatus={status}
             sessionExist={sessionExist}
             sortProducts={sortValue}
+            offset={offset}
+            perPage={5}
           />
           <Row>
             <Col xs="0" md="3" className=""></Col>
