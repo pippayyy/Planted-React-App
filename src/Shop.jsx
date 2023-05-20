@@ -20,6 +20,7 @@ import SelectedCategoryContext from "./SelectedCategoryContext";
 import CardIconText from "./CardIconText";
 import fetchFavs from "./fetchFavs";
 import fetchSession from "./fetchSession";
+import ReactPaginate from "react-paginate";
 // import ReactPaginate from "react-paginate";
 
 const Shop = () => {
@@ -74,21 +75,17 @@ const Shop = () => {
   const favsRefetch = favsResults?.refetch;
 
   //pagination stuff
-  // const [currentPage, setCurrentPage] = useState(0);
+  const [currentPage, setCurrentPage] = useState(0);
 
-  // const PER_PAGE = 5;
-  // const offset = currentPage * PER_PAGE;
-  // const currentPageData = productsSorted
-  //   .slice(offset, offset + PER_PAGE)
-  //   .map(({ thumburl }) => (
-  //     <img src={thumburl} key={thumburl} alt={thumburl} />
-  //   ));
+  const PER_PAGE = 5;
+  const offset = currentPage * PER_PAGE;
+  const currentPageData = products.slice(offset, offset + PER_PAGE);
 
-  // const pageCount = Math.ceil(productsSorted.length / PER_PAGE);
+  const pageCount = Math.ceil(products.length / PER_PAGE);
 
-  // function handlePageClick({ selected: selectedPage }) {
-  //   setCurrentPage(selectedPage);
-  // }
+  function handlePageClick({ selected: selectedPage }) {
+    setCurrentPage(selectedPage);
+  }
 
   return (
     <Container fluid className="content-container">
@@ -139,7 +136,7 @@ const Shop = () => {
             </Input>
             <Label for="exampleSelect">SORT</Label>
           </FormGroup>
-          {/* <ReactPaginate
+          <ReactPaginate
             previousLabel={"← Previous"}
             nextLabel={"Next →"}
             pageCount={pageCount}
@@ -149,10 +146,9 @@ const Shop = () => {
             nextLinkClassName={"pagination__link"}
             disabledClassName={"pagination__link--disabled"}
             activeClassName={"pagination__link--active"}
-          /> */}
-          {/* {currentPageData} */}
+          />
           <ResultsProduct
-            products={products}
+            products={currentPageData}
             favs={favs}
             refetch={favsRefetch}
             prodstatus={status}
