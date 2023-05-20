@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { Container, Row, Col, Card, CardBody, Button } from "reactstrap";
 import CardIconText from "./CardIconText";
@@ -14,9 +14,6 @@ const MyAccount = () => {
   //Get user details
   const userEmail = ordersResults?.data?.outcome?.userEmail ?? [];
   const userFName = ordersResults?.data?.outcome?.userFname ?? [];
-
-  //Used to nav to order confirm page
-  const navigate = useNavigate();
 
   //function to place order
   function logout() {

@@ -15,6 +15,8 @@ const ResultsProduct = ({
 }) => {
   const [productsSorted, setProductsSorted] = useState(products);
 
+  console.log("offset ", offset);
+
   useEffect(() => {
     switch (sortProducts) {
       case "dateDesc":
@@ -48,7 +50,8 @@ const ResultsProduct = ({
         setProductsSorted(products.slice(offset, offset + perPage));
     }
     console.log("productsSorted in effect ", productsSorted);
-  }, [sortProducts, products]);
+    console.log("offset in effect ", offset);
+  }, [sortProducts, products, offset]);
 
   return (
     <Row className="g-2 my-2">
