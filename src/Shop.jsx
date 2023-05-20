@@ -51,47 +51,12 @@ const Shop = () => {
   //Refetch session on page load to ensure correct session status is set
   useEffect(() => {
     sessionRefetch();
-  }, []);
+  });
 
-  //Used to sort products
-  // useEffect(() => {
-  //   console.log("in product useefect");
-  //   setProductsSorted(products);
-  // }, [products]);
-
-  //Used to sort products
-  // useEffect(() => {
-  //   console.log("sortValue: ", sortValue);
-  //   console.log("productsSorted pip : ", productsSorted);
-  //   switch (sortValue) {
-  //     case "dateDesc":
-  //       //Sort by created date
-  //       setProductsSorted(
-  //         productsSorted.sort(
-  //           (a, b) => parseFloat(b.product_id) - parseFloat(a.product_id)
-  //         )
-  //       );
-  //       break;
-  //     case "priceAsc":
-  //       //Sort by price ascending
-  //       setProductsSorted(
-  //         productsSorted.sort(
-  //           (a, b) => parseFloat(a.price) - parseFloat(b.price)
-  //         )
-  //       );
-  //       break;
-  //     case "priceDesc":
-  //       //Sort by price descending
-  //       setProductsSorted(
-  //         productsSorted.sort(
-  //           (a, b) => parseFloat(b.price) - parseFloat(a.price)
-  //         )
-  //       );
-  //       break;
-  //     default:
-  //     // code block
-  //   }
-  // }, [sortValue]);
+  //Resest sort filter when category is changed
+  useEffect(() => {
+    setSortValue("dateAsc");
+  }, [selectedCategory]);
 
   //Check if session exists
   const sessionResults = useQuery(["getSessionDetail"], fetchSession, 0, {
@@ -148,6 +113,7 @@ const Shop = () => {
                 onClick={() => {
                   setSelectedCategory("all");
                   setSearchParamSection("/search/" + searchParam);
+                  setSortValue("dateAsc");
                 }}
               >
                 <Search className="fs-3 mx-2" />
@@ -160,8 +126,10 @@ const Shop = () => {
               id="exampleSelect"
               name="select"
               type="select"
+              value={sortValue}
               onChange={(event) => {
                 setSortValue(event.target.value);
+                console.log("sort value changed to: ", event.target.value);
               }}
             >
               <option value="dateAsc">Recommended</option>
