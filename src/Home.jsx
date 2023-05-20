@@ -159,6 +159,8 @@ const Home = () => {
             refetch={favsRefetch}
             prodstatus={status}
             sessionExist={sessionExist}
+            offset={0}
+            perPage={products.length}
           />
           <Row>
             <Col xs="0" md="3" className=""></Col>

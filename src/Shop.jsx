@@ -79,7 +79,7 @@ const Shop = () => {
   const [currentPage, setCurrentPage] = useState(0);
   const [offset, setOffset] = useState(0);
 
-  const PER_PAGE = 5;
+  const PER_PAGE = 12;
 
   const pageCount = Math.ceil(products.length / PER_PAGE);
 
@@ -156,7 +156,7 @@ const Shop = () => {
             sessionExist={sessionExist}
             sortProducts={sortValue}
             offset={offset}
-            perPage={5}
+            perPage={12}
           />
           <Row>
             <Col xs="0" md="3" className=""></Col>
