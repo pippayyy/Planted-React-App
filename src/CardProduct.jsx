@@ -25,7 +25,9 @@ const CardProduct = ({
       ? delFav(id, refetch)
       : sessionExist == "success"
       ? addFav(id, refetch)
-      : navigate("/oops");
+      : navigate("/oops", {
+          state: { message: "It seems like you are not signed in!" },
+        });
   };
 
   return (
