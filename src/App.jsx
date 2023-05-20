@@ -41,13 +41,16 @@ const queryClient = new QueryClient({
 
 function ProtectedRoute({ component: Component, altpath: Altpath, ...rest }) {
   //Check if session exists
-  const { data, status } = useQuery(["getSession"], fetchSession);
+  const { data, status, refetch } = useQuery(["getSession"], fetchSession, {
+    cacheTime: 0,
+  });
   //Get session status
   const sessionExist = data?.outcome?.message ?? [];
 
   if (status == "loading") {
     null;
   } else {
+    console.log("sessionExist: ", sessionExist);
     if (sessionExist == "success") {
       return <Component {...rest} />;
     } else {
@@ -57,6 +60,7 @@ function ProtectedRoute({ component: Component, altpath: Altpath, ...rest }) {
           state={{
             message: "It seems like you are not signed in!",
             redirectUrl: "/",
+            refetchFunc: refetch,
           }}
         />
       );
@@ -66,13 +70,22 @@ function ProtectedRoute({ component: Component, altpath: Altpath, ...rest }) {
 
 function AdminRoute({ component: Component, altpath: Altpath, ...rest }) {
   //Check if session exists
-  const { data, status } = useQuery(["getSessionAdmin"], fetchSessionAdmin);
+  const { data, status, refetch } = useQuery(
+    ["getSessionAdmin"],
+    fetchSessionAdmin,
+    {
+      cacheTime: 0,
+    }
+  );
   //Get session status
   const sessionExistAdmin = data?.outcome?.message ?? [];
+
+  refetch();
 
   if (status == "loading") {
     null;
   } else {
+    console.log("sessionExistAdmin: ", sessionExistAdmin);
     if (sessionExistAdmin == "success") {
       return <Component {...rest} />;
     } else {

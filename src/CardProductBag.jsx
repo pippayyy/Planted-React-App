@@ -17,7 +17,6 @@ import {
 import "bootstrap/dist/css/bootstrap.min.css";
 import updateOrderDetails from "./funcUpdateOrderDetails";
 import addToBasket from "./funcAddToBasket";
-import { useState } from "react";
 import addFav from "./funcAddFav";
 import delFav from "./funcDelFav";
 
@@ -49,15 +48,8 @@ const CardProductBag = ({
       ? "rounded-circle img-product-small-circle"
       : "rounded-circle img-product-medium-circle";
 
-  const [hover, setHover] = useState(in_fav ? true : false);
   const onHover = () => {
-    setHover(true);
-    in_fav ? null : addFav(id, refetchFav);
-  };
-
-  const onLeave = () => {
-    setHover(false);
-    delFav(id, refetchFav);
+    in_fav ? delFav(id, refetchFav) : addFav(id, refetchFav);
   };
 
   return (
@@ -66,18 +58,10 @@ const CardProductBag = ({
         <Container className="px-0">
           <Row>
             <Col xs="12" className="d-flex justify-content-end">
-              {hover ? (
-                <HeartFill
-                  className="fs-5 heart-icon-fill"
-                  onMouseEnter={onLeave}
-                  onMouseLeave={onHover}
-                />
+              {in_fav ? (
+                <HeartFill className="fs-5 heart-icon-fill" onClick={onHover} />
               ) : (
-                <Heart
-                  className="fs-5 heart-icon"
-                  onMouseEnter={onHover}
-                  onMouseLeave={onLeave}
-                />
+                <Heart className="fs-5 heart-icon" onClick={onHover} />
               )}
             </Col>
           </Row>

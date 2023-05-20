@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Card, CardTitle, CardBody, Container, Row, Col } from "reactstrap";
 import { Heart, HeartFill } from "react-bootstrap-icons";
@@ -21,18 +20,11 @@ const CardProduct = ({
   //Use Navigate to go back to prev section
   const navigate = useNavigate();
 
-  const [hover, setHover] = useState(in_fav ? true : false);
   const onHover = () => {
     sessionExist == "success" && in_fav
-      ? setHover(true)
+      ? delFav(id, refetch)
       : sessionExist == "success"
-      ? (addFav(id, refetch), setHover(true))
-      : navigate("/oops");
-  };
-
-  const onLeave = () => {
-    sessionExist == "success"
-      ? (setHover(false), delFav(id, refetch))
+      ? addFav(id, refetch)
       : navigate("/oops");
   };
 
@@ -43,18 +35,10 @@ const CardProduct = ({
           <Row>
             <Col xs="9" className=""></Col>
             <Col xs="2" className="p-0">
-              {hover ? (
-                <HeartFill
-                  className="fs-4 heart-icon-fill"
-                  onMouseEnter={onLeave}
-                  onMouseLeave={onHover}
-                />
+              {in_fav ? (
+                <HeartFill className="fs-4 heart-icon-fill" onClick={onHover} />
               ) : (
-                <Heart
-                  className="fs-4 heart-icon"
-                  onMouseEnter={onHover}
-                  onMouseLeave={onLeave}
-                />
+                <Heart className="fs-4 heart-icon" onClick={onHover} />
               )}
             </Col>
             <Col xs="1" className=""></Col>

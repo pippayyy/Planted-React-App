@@ -89,32 +89,14 @@ const Detail = () => {
         : false
       : null;
 
-  // const [hover, setHover] = useState(in_fav ? true : false);
-
   const onHover = () => {
     sessionFetchStatus == "success"
       ? sessionExist == "success" && in_fav
-        ? null
+        ? delFav(products[0]["product_id"], favsRefetch)
         : sessionExist == "success"
         ? addFav(products[0]["product_id"], favsRefetch)
         : navigate("/oops", {
-            state: {
-              message: "It seems like you are not signed in!",
-              redirectUrl: "/",
-            },
-          })
-      : null;
-  };
-
-  const onLeave = () => {
-    sessionFetchStatus == "success"
-      ? sessionExist == "success"
-        ? delFav(products[0]["product_id"], favsRefetch)
-        : navigate("/oops", {
-            state: {
-              message: "It seems like you are not signed in!",
-              redirectUrl: "/",
-            },
+            state: { message: "It seems like you are not signed in!" },
           })
       : null;
   };
@@ -170,14 +152,12 @@ const Detail = () => {
                             {in_fav ? (
                               <HeartFill
                                 className="fs-5 heart-icon-fill"
-                                onMouseEnter={onLeave}
-                                onMouseLeave={onHover}
+                                onClick={onHover}
                               />
                             ) : (
                               <Heart
                                 className="fs-5 heart-icon"
-                                onMouseEnter={onHover}
-                                onMouseLeave={onLeave}
+                                onClick={onHover}
                               />
                             )}
                           </Col>
