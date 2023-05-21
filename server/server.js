@@ -1112,9 +1112,11 @@ app.post("/api/order/placeorder", async (req, res) => {
                                   </td>
                               </tr>
                                   ${
-                                    OrderDetailsActive[0].discount_id == null
-                                      ? ""
-                                      : `<tr>
+                                    OrderDetailsActive[0].discount_id ==
+                                    null ? (
+                                      ""
+                                    ) : (
+                                      <tr>
                                         <td
                                           width="75%"
                                           align="left"
@@ -1127,9 +1129,12 @@ app.post("/api/order/placeorder", async (req, res) => {
                                           align="left"
                                           style="font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 16px; font-weight: 400; line-height: 24px; padding: 5px 10px;"
                                         >
-                                          ${OrderDetailsActive[0].discount_value}%
+                                          $
+                                          {OrderDetailsActive[0].discount_value}
+                                          %
                                         </td>
-                                      </tr>`
+                                      </tr>
+                                    )
                                   }
                                       <tr>
                                           <td width="75%" align="left" style="font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 16px; font-weight: 800; line-height: 24px; padding: 10px; border-bottom: 3px solid #eeeeee;">
