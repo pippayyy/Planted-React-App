@@ -135,13 +135,7 @@ const CardProductBag = ({
                           ? addToBasket(id, refetch)
                           : (funcPassed(id, refetchFav),
                             addToBasket(id, refetch))
-                        : updateOrderDetails(
-                            order_id,
-                            id,
-                            qty_in_bag,
-                            0,
-                            refetch
-                          );
+                        : updateOrderDetails(order_id, id, 0, 1, refetch);
                     }}
                     disabled={stock < 1 ? true : false}
                   >

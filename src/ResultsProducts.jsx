@@ -48,6 +48,7 @@ const ResultsProduct = ({
       default:
         //Default - no sort
         setProductsSorted(products.slice(offset, offset + perPage));
+        break;
     }
     console.log("productsSorted in effect ", productsSorted);
     console.log("offset in effect ", offset);
