@@ -826,7 +826,7 @@ const AdminForm = () => {
             }}
           >
             <Row className="mt-2">
-              <Col xs="12" md="6" className="mb-3">
+              <Col xs="12" className="mb-3">
                 <Card className="rounded-5 text-start d-flex h-100">
                   <CardBody className="">
                     <Container className="px-0">
