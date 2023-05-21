@@ -37,6 +37,18 @@ const CheckoutSuccess = () => {
                     xs="12"
                     className="justify-content-center align-items-center my-3"
                   >
+                    <Link
+                      to={`/order/detail`}
+                      state={{ orderId: orderId }}
+                      className="category-button"
+                    >
+                      <Button
+                        block
+                        className="button-colour-subtle border-0 text-black rounded-4 d-flex justify-content-center align-items-center py-3 mt-2"
+                      >
+                        <h5 className="m-0">View Order</h5>
+                      </Button>
+                    </Link>
                     <Link to={`/`} className="category-button">
                       <Button
                         block
