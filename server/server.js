@@ -202,43 +202,47 @@ app.post(
   "/api/admin/product/add",
   uploadImages.single("image"),
   async (req, res) => {
-    //Get current datetime
-    var date = new Date();
-    var dateStr =
-      date.getFullYear() +
-      "-" +
-      ("00" + (date.getMonth() + 1)).slice(-2) +
-      "-" +
-      ("00" + date.getDate()).slice(-2) +
-      " " +
-      ("00" + date.getHours()).slice(-2) +
-      ":" +
-      ("00" + date.getMinutes()).slice(-2) +
-      ":" +
-      ("00" + date.getSeconds()).slice(-2);
+    if (req.session && req.session.userId) {
+      //Get current datetime
+      var date = new Date();
+      var dateStr =
+        date.getFullYear() +
+        "-" +
+        ("00" + (date.getMonth() + 1)).slice(-2) +
+        "-" +
+        ("00" + date.getDate()).slice(-2) +
+        " " +
+        ("00" + date.getHours()).slice(-2) +
+        ":" +
+        ("00" + date.getMinutes()).slice(-2) +
+        ":" +
+        ("00" + date.getSeconds()).slice(-2);
 
-    //Check if code already exists
-    const productAddedResponse = await addProduct(
-      req.body.productName,
-      req.body.category,
-      req.body.productDescrip,
-      "../images/" + req.file.filename,
-      req.body.productQty,
-      req.body.productPrice,
-      req.body.discountPerc,
-      dateStr,
-      req.session.userId
-    );
+      //Check if code already exists
+      const productAddedResponse = await addProduct(
+        req.body.productName,
+        req.body.category,
+        req.body.productDescrip,
+        "../images/" + req.file.filename,
+        req.body.productQty,
+        req.body.productPrice,
+        req.body.discountPerc,
+        dateStr,
+        req.session.userId
+      );
 
-    if (productAddedResponse.affectedRows > 0) {
-      res.json({
-        outcome: {
-          status: "success",
-          message: "Product created successfully!",
-        },
-      });
+      if (productAddedResponse.affectedRows > 0) {
+        res.json({
+          outcome: {
+            status: "success",
+            message: "Product created successfully!",
+          },
+        });
+      } else {
+        res.json({ outcome: productAddedResponse });
+      }
     } else {
-      res.json({ outcome: productAddedResponse });
+      res.json({ outcome: "Failed" });
     }
   }
 );
@@ -1283,9 +1287,16 @@ app.post("/api/favourites/add/prod/:prodId", async (req, res) => {
 
 //Get all discount codes
 app.get("/api/discounts", async (req, res) => {
-  const discounts = await getAllDiscounts();
+  if (req.session && req.session.userId) {
+    const validUserDetails = await getCustomerById(req.session.userId);
 
-  res.json({ outcome: discounts });
+    if (validUserDetails.length > 0 && validUserDetails[0].admin == 1) {
+      const discounts = await getAllDiscounts();
+      res.json({ outcome: discounts });
+    }
+  } else {
+    res.json({ outcome: "failed" });
+  }
 });
 
 //Static router to serve react front-end

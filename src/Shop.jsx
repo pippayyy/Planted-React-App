@@ -21,7 +21,6 @@ import CardIconText from "./CardIconText";
 import fetchFavs from "./fetchFavs";
 import fetchSession from "./fetchSession";
 import ReactPaginate from "react-paginate";
-// import ReactPaginate from "react-paginate";
 
 const Shop = () => {
   const [selectedCategory, setSelectedCategory] = useContext(
@@ -112,6 +111,8 @@ const Shop = () => {
                   setSelectedCategory("all");
                   setSearchParamSection("/search/" + searchParam);
                   setSortValue("dateAsc");
+                  setCurrentPage(0);
+                  setOffset(0 * PER_PAGE);
                 }}
               >
                 <Search className="fs-3 mx-2" />
@@ -138,8 +139,8 @@ const Shop = () => {
             <Label for="exampleSelect">SORT</Label>
           </FormGroup>
           <ReactPaginate
-            previousLabel={"← Previous"}
-            nextLabel={"Next →"}
+            previousLabel={"←"}
+            nextLabel={"→"}
             pageCount={pageCount}
             onPageChange={handlePageClick}
             containerClassName={"pagination"}
