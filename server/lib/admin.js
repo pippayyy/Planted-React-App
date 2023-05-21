@@ -150,7 +150,7 @@ export const updateProduct = async (
   userId
 ) => {
   const [response] = await connection.query(
-    "UPDATE `product` SET name = ?, category_id = ?, description = ?, stock = ?, price = ?, discount_percent = ? created_on = ?,created_by = ?,modified_on = ?,modified_by =? WHERE product_id = ?",
+    "UPDATE `product` SET name = ?, category_id = ?, description = ?, stock = ?, price = ?, discount_percent = ?, created_on = ?,created_by = ?,modified_on = ?,modified_by =? WHERE product_id = ?",
     [
       name,
       category,

@@ -97,7 +97,7 @@ const OrderDetail = () => {
                       <Row className="">
                         <Col xs="12" className="">
                           <CardIconText
-                            title={"ORDER ID " + orderItems[0].order_number}
+                            title={"ORDER ID PLANTED#" + orderItems[0].order_id}
                             descrip={
                               <span>
                                 Status:

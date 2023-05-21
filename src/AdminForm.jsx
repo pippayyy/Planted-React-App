@@ -757,171 +757,182 @@ const AdminForm = () => {
 
   return (
     <Container fluid className="content-container">
-      <Row className="mt-3 mb-0">
-        <Col xs="8">
-          <Breadcrumb className="mb-1">
-            <BreadcrumbItem>
-              <Button
-                className="btn btn-link p-0 pb-2 align-baseline"
-                onClick={() => navigate(-1)}
-              >
-                Back
-              </Button>
-            </BreadcrumbItem>
-            <BreadcrumbItem active className="align-baseline">
-              Edit
-            </BreadcrumbItem>
-          </Breadcrumb>
-        </Col>
-      </Row>
-      <Form
-        id="orderForm"
-        className="needs-validation m-0"
-        encType="multipart/form-data"
-        onSubmit={(e) => {
-          e.preventDefault();
-          const formData = new FormData(e.target);
-          const newFormData = new FormData();
-          const completedForm = {};
+      <Row>
+        <Col xs="0" md="2" className=""></Col>
+        <Col xs="12" md="8" className="">
+          <Row className="mt-3 mb-0">
+            <Col xs="8">
+              <Breadcrumb className="mb-1">
+                <BreadcrumbItem>
+                  <Button
+                    className="btn btn-link p-0 pb-2 align-baseline"
+                    onClick={() => navigate(-1)}
+                  >
+                    Back
+                  </Button>
+                </BreadcrumbItem>
+                <BreadcrumbItem active className="align-baseline">
+                  Edit
+                </BreadcrumbItem>
+              </Breadcrumb>
+            </Col>
+          </Row>
+          <Form
+            id="orderForm"
+            className="needs-validation m-0"
+            encType="multipart/form-data"
+            onSubmit={(e) => {
+              e.preventDefault();
+              const formData = new FormData(e.target);
+              const newFormData = new FormData();
+              const completedForm = {};
 
-          {
-            formSectionName !== null
-              ? formFields.fields.map((field) =>
-                  field.submitInForm
-                    ? (completedForm[field.formId] =
-                        field.fieldType == "switch"
-                          ? field.formDataManip(formData.get(field.formId))
-                          : formData.get(field.formId) ?? "")
-                    : null
-                )
-              : null;
-          }
+              {
+                formSectionName !== null
+                  ? formFields.fields.map((field) =>
+                      field.submitInForm
+                        ? (completedForm[field.formId] =
+                            field.fieldType == "switch"
+                              ? field.formDataManip(formData.get(field.formId))
+                              : formData.get(field.formId) ?? "")
+                        : null
+                    )
+                  : null;
+              }
 
-          {
-            formSectionName !== null
-              ? formFields.fields.map((field) =>
-                  field.submitInForm
-                    ? field.fieldType == "switch"
-                      ? newFormData.append(
-                          field.formId,
-                          field.formDataManip(formData.get(field.formId))
-                        )
-                      : newFormData.append(
-                          field.formId,
-                          formData.get(field.formId) ?? ""
-                        )
-                    : null
-                )
-              : null;
-          }
+              {
+                formSectionName !== null
+                  ? formFields.fields.map((field) =>
+                      field.submitInForm
+                        ? field.fieldType == "switch"
+                          ? newFormData.append(
+                              field.formId,
+                              field.formDataManip(formData.get(field.formId))
+                            )
+                          : newFormData.append(
+                              field.formId,
+                              formData.get(field.formId) ?? ""
+                            )
+                        : null
+                    )
+                  : null;
+              }
 
-          const formFunc = formFields.formFunc.function;
+              const formFunc = formFields.formFunc.function;
 
-          formFields.submitAsJson
-            ? formFunc(completedForm)
-            : formFunc(newFormData);
-        }}
-      >
-        <Row className="mt-2">
-          <Col xs="12" md="6" className="mb-3">
-            <Card className="rounded-5 text-start d-flex h-100">
-              <CardBody className="">
-                <Container className="px-0">
-                  <Row className="mt-2">
-                    {formSectionName !== null
-                      ? formFields.fields.map((field) => (
-                          <Col xs="12" className="" key={field.fieldId}>
-                            <FormGroup
-                              floating={
-                                field.fieldType == "switch" ||
-                                field.fieldType == "file"
-                                  ? false
-                                  : true
-                              }
-                              switch={
-                                field.fieldType == "switch" ? true : false
-                              }
-                            >
-                              <Input
-                                id={field.formId}
-                                name={field.formId}
-                                placeholder={field.fieldHintText}
-                                type={field.fieldType}
-                                role={
-                                  field.fieldType == "switch" ? "switch" : null
-                                }
-                                required={field.fieldReq}
-                                readOnly={field.fieldDisabled}
-                                {...field.defaultThing}
-                              >
-                                {field.fieldType !== "select"
-                                  ? null
-                                  : field.selectOptions.length > 0
-                                  ? field.selectOptions.map((option) => (
-                                      <option key={option.id} value={option.id}>
-                                        {option.name}
-                                      </option>
-                                    ))
-                                  : null}
-                              </Input>
-                              <Label
-                                check={
-                                  field.fieldType == "switch" ? true : false
-                                }
-                                for={field.formId}
-                              >
-                                {field.fieldName}
-                              </Label>
-                              {/* {field.formTextVis ? (
+              formFields.submitAsJson
+                ? formFunc(completedForm)
+                : formFunc(newFormData);
+            }}
+          >
+            <Row className="mt-2">
+              <Col xs="12" md="6" className="mb-3">
+                <Card className="rounded-5 text-start d-flex h-100">
+                  <CardBody className="">
+                    <Container className="px-0">
+                      <Row className="mt-2">
+                        {formSectionName !== null
+                          ? formFields.fields.map((field) => (
+                              <Col xs="12" className="" key={field.fieldId}>
+                                <FormGroup
+                                  floating={
+                                    field.fieldType == "switch" ||
+                                    field.fieldType == "file"
+                                      ? false
+                                      : true
+                                  }
+                                  switch={
+                                    field.fieldType == "switch" ? true : false
+                                  }
+                                >
+                                  <Input
+                                    id={field.formId}
+                                    name={field.formId}
+                                    placeholder={field.fieldHintText}
+                                    type={field.fieldType}
+                                    role={
+                                      field.fieldType == "switch"
+                                        ? "switch"
+                                        : null
+                                    }
+                                    required={field.fieldReq}
+                                    readOnly={field.fieldDisabled}
+                                    {...field.defaultThing}
+                                  >
+                                    {field.fieldType !== "select"
+                                      ? null
+                                      : field.selectOptions.length > 0
+                                      ? field.selectOptions.map((option) => (
+                                          <option
+                                            key={option.id}
+                                            value={option.id}
+                                          >
+                                            {option.name}
+                                          </option>
+                                        ))
+                                      : null}
+                                  </Input>
+                                  <Label
+                                    check={
+                                      field.fieldType == "switch" ? true : false
+                                    }
+                                    for={field.formId}
+                                  >
+                                    {field.fieldName}
+                                  </Label>
+                                  {/* {field.formTextVis ? (
                                 <FormText>
                                   hellooo{field.formTextValue}
                                 </FormText>
                               ) : null} */}
-                            </FormGroup>
+                                </FormGroup>
+                              </Col>
+                            ))
+                          : null}
+                        <Col xs="12" className="mt-3 mb-1">
+                          <Button
+                            block
+                            type="submit"
+                            className="button-colour border-0 text-black rounded-4 d-flex justify-content-center align-items-center py-3"
+                          >
+                            <h5 className="m-0">Save</h5>
+                          </Button>
+                        </Col>
+                        {formFields.delButtonVis ? (
+                          <Col xs="12" className="mb-3 mt-1">
+                            <Button
+                              block
+                              onClick={() => {
+                                handleDelClick();
+                              }}
+                              className="btn-danger border-0 rounded-4 d-flex justify-content-center align-items-center py-3"
+                            >
+                              <h5 className="m-0">Delete</h5>
+                            </Button>
                           </Col>
-                        ))
-                      : null}
-                    <Col xs="12" className="mt-3 mb-1">
-                      <Button
-                        block
-                        type="submit"
-                        className="button-colour border-0 text-black rounded-4 d-flex justify-content-center align-items-center py-3"
-                      >
-                        <h5 className="m-0">Save</h5>
-                      </Button>
-                    </Col>
-                    {formFields.delButtonVis ? (
-                      <Col xs="12" className="mb-3 mt-1">
-                        <Button
-                          block
-                          onClick={() => {
-                            handleDelClick();
-                          }}
-                          className="btn-danger border-0 rounded-4 d-flex justify-content-center align-items-center py-3"
-                        >
-                          <h5 className="m-0">Delete</h5>
-                        </Button>
-                      </Col>
-                    ) : null}
-                    <Col xs="12" className="mb-2">
-                      {authOutcome.status == null ? null : (
-                        <Alert color={authOutcome.status}>
-                          {authOutcome.status == "success" ? (
-                            <CheckCircle className="fs-1 me-2" />
-                          ) : (
-                            <ExclamationCircle className="fs-1 me-2" />
+                        ) : null}
+                        <Col xs="12" className="mb-2">
+                          {authOutcome.status == null ? null : (
+                            <Alert color={authOutcome.status}>
+                              {authOutcome.status == "success" ? (
+                                <CheckCircle className="fs-1 me-2" />
+                              ) : (
+                                <ExclamationCircle className="fs-1 me-2" />
+                              )}
+                              {authOutcome.message}
+                            </Alert>
                           )}
-                          {authOutcome.message}
-                        </Alert>
-                      )}
-                    </Col>
-                  </Row>
-                </Container>
-              </CardBody>
-            </Card>
-          </Col>
-        </Row>
-      </Form>
+                        </Col>
+                      </Row>
+                    </Container>
+                  </CardBody>
+                </Card>
+              </Col>
+            </Row>
+          </Form>
+        </Col>
+        <Col xs="0" md="2" className=""></Col>
+      </Row>
     </Container>
   );
 };
