@@ -46,7 +46,7 @@ const CardIconText = ({
     <Card body className={cardClass}>
       <Container>
         <Row>
-          <Col xs={colOne} md="3" className="px-0 text-center me-2">
+          <Col xs={colOne} md="3" className="px-0 text-center">
             <CardIcon className={iconClass} />
           </Col>
           <Col xs={colTwo} md="9" className="px-0 ps-2">
