@@ -83,6 +83,10 @@ const SignInup = () => {
           status: response.outcome.status,
           message: response.outcome.message,
         });
+
+        if (response.outcome.status == "failed") {
+          setContinueButtonVis(false);
+        }
       });
   }
 
@@ -161,6 +165,8 @@ const SignInup = () => {
                                 name="email"
                                 placeholder="Email Address"
                                 type="email"
+                                readOnly={continueButtonVis}
+                                disabled={continueButtonVis}
                                 required
                               />
                               <Label for="email">Email Address</Label>
@@ -171,6 +177,8 @@ const SignInup = () => {
                                 name="password"
                                 placeholder="Password"
                                 type="password"
+                                readOnly={continueButtonVis}
+                                disabled={continueButtonVis}
                                 required
                               />
                               <Label for="password">Password</Label>
@@ -234,6 +242,8 @@ const SignInup = () => {
                                 name="email"
                                 placeholder="Email Address"
                                 type="email"
+                                readOnly={continueButtonVis}
+                                disabled={continueButtonVis}
                                 required
                               />
                               <Label for="email">Email Address</Label>
@@ -244,6 +254,8 @@ const SignInup = () => {
                                 name="fname"
                                 placeholder="First Name"
                                 type="text"
+                                readOnly={continueButtonVis}
+                                disabled={continueButtonVis}
                                 required
                               />
                               <Label for="fname">First Name</Label>
@@ -254,6 +266,8 @@ const SignInup = () => {
                                 name="lname"
                                 placeholder="Last Name"
                                 type="text"
+                                readOnly={continueButtonVis}
+                                disabled={continueButtonVis}
                                 required
                               />
                               <Label for="lname">Last Name</Label>
@@ -264,6 +278,8 @@ const SignInup = () => {
                                 name="phone"
                                 placeholder="Phone Number"
                                 type="tel"
+                                readOnly={continueButtonVis}
+                                disabled={continueButtonVis}
                                 required
                               />
                               <Label for="phone">Phone Number</Label>
@@ -274,6 +290,8 @@ const SignInup = () => {
                                 name="password"
                                 placeholder="Password"
                                 type="password"
+                                readOnly={continueButtonVis}
+                                disabled={continueButtonVis}
                                 required
                               />
                               <Label for="password">Password</Label>
