@@ -17,16 +17,18 @@ export const getActiveCategories = async () => {
 export const getAllProducts = async () => {
   const [products] = await connection.execute(
     `SELECT product.*,
-        sum(product_qty) AS virtual_stock_reserved,
-        categories.name AS category_name
-        FROM product
-        LEFT JOIN (SELECT product_id AS details_product_id,product_qty,date_added,order_details.order_id AS details_order_id FROM order_details
-        LEFT JOIN orders ON orders.order_id = order_details.order_id
-        WHERE orders.order_status = 'Basket' AND date_added BETWEEN DATE_ADD(NOW(), INTERVAL -1 HOUR) AND NOW()) AS order_details
-        ON order_details.details_product_id = product.product_id
-        LEFT JOIN categories ON categories.id = product.category_id
-        GROUP BY product_id
-        ORDER BY product_id DESC;`
+    sum(product_qty) AS virtual_stock_reserved,
+    categories.name AS category_name,
+    product_details.product_details_json
+    FROM product
+    LEFT JOIN (SELECT product_id AS details_product_id,product_qty,date_added,order_details.order_id AS details_order_id FROM order_details
+    LEFT JOIN orders ON orders.order_id = order_details.order_id
+    WHERE orders.order_status = 'Basket' AND date_added BETWEEN DATE_ADD(NOW(), INTERVAL -1 HOUR) AND NOW()) AS order_details
+    ON order_details.details_product_id = product.product_id
+    LEFT JOIN categories ON categories.id = product.category_id
+    LEFT JOIN product_details ON product_details.product_id = product.product_id
+    GROUP BY product_id
+    ORDER BY product_id DESC;`
   );
 
   return products;
