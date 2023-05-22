@@ -76,8 +76,8 @@ const Home = () => {
         <Col xs="0" md="2" className=""></Col>
         <Col xs="12" md="8" className="">
           <Row>
-            <Col xs="0" md="3" className=""></Col>
-            <Col xs="6" md="3" className="px-0">
+            <Col xs="0" lg="2" className=""></Col>
+            <Col xs="6" lg="4" className="px-0">
               <CardIconText
                 title="FREE SHIPPING"
                 descrip="Orders over £20"
@@ -91,7 +91,7 @@ const Home = () => {
             <Col className="px-0 d-flex col-auto">
               <div className="vr my-3"></div>
             </Col>
-            <Col md="3" className="px-0 col-auto">
+            <Col md="4" className="px-0 col-auto">
               <CardIconText
                 title="FREE RETURNS"
                 descrip="Within 30 days"
@@ -102,7 +102,7 @@ const Home = () => {
                 colTwo="10"
               />
             </Col>
-            <Col xs="0" md="3" className=""></Col>
+            <Col xs="0" lg="2" className=""></Col>
           </Row>
           <ResultsCategories categories={categories} />
           <CallToActionButton
