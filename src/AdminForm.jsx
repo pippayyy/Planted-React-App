@@ -83,8 +83,8 @@ const AdminForm = () => {
           dataFieldName: "discount_value",
           defaultThing: {
             defaultValue: linkData !== null ? linkData.discount_value : "",
-            pattern: "[0-9]{1,3}",
-            maxLength: 3,
+            min: "1",
+            max: "100",
           },
         },
         {
@@ -182,8 +182,8 @@ const AdminForm = () => {
           dataFieldName: "discount_value",
           defaultThing: {
             defaultValue: "",
-            pattern: "[0-9]{1,3}",
-            maxLength: 3,
+            min: "1",
+            max: "100",
           },
         },
         {
