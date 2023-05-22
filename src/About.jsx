@@ -8,7 +8,8 @@ const About = () => {
         <Col xs="0" md="2" className=""></Col>
         <Col xs="12" md="8" className="">
           <Row>
-            <Col xs="6" className="px-0">
+            <Col xs="0" lg="2" className=""></Col>
+            <Col xs="6" lg="4" className="px-0">
               <CardIconText
                 title="FREE SHIPPING"
                 descrip="Orders over £20"
@@ -22,17 +23,18 @@ const About = () => {
             <Col className="px-0 d-flex col-auto">
               <div className="vr my-3"></div>
             </Col>
-            <Col className="px-0 col-auto">
+            <Col md="4" className="px-0 col-auto">
               <CardIconText
                 title="FREE RETURNS"
                 descrip="Within 30 days"
                 iconName="arrowReturnsIcon"
-                iconClass="fs-1 me-3"
+                iconClass="fs-1"
                 cardClass="my-2 border-0 bg-transparent"
                 colOne="2"
                 colTwo="10"
               />
             </Col>
+            <Col xs="0" lg="2" className=""></Col>
           </Row>
           <Row>
             <Col xs="12" lg="6" className="d-flex align-items-stretch">

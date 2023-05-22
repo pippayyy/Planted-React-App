@@ -159,9 +159,9 @@ const Shop = () => {
             offset={offset}
             perPage={12}
           />
-          <Row>
-            <Col xs="0" md="3" className=""></Col>
-            <Col xs="12" md="6" className="px-0">
+          <Row className="mt-4">
+            <Col xs="0" lg="3" className=""></Col>
+            <Col xs="12" lg="6" className="px-0">
               <CardIconText
                 title="GET 10% OFF USING CODE ‘NEW’"
                 descrip="Valid only for new customers"
@@ -172,7 +172,7 @@ const Shop = () => {
                 colTwo="10"
               />
             </Col>
-            <Col xs="0" md="3" className=""></Col>
+            <Col xs="0" lg="3" className=""></Col>
           </Row>
         </Col>
         <Col xs="0" md="2" className=""></Col>

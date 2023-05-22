@@ -12,7 +12,7 @@ const ResultsCategories = ({ categories }) => {
         </div>
       ) : (
         categories.map((category) => (
-          <Col xs="4" md="2" key={category.id}>
+          <Col xs="4" lg="2" key={category.id}>
             <CardCategories
               name={category.name}
               img={category.img}
