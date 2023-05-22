@@ -22,11 +22,9 @@ const ResultsProduct = ({
       case "dateDesc":
         //Sort by created date
         setProductsSorted(
-          products.sort(
-            (a, b) =>
-              parseFloat(b.product_id) -
-              parseFloat(a.product_id).slice(offset, offset + perPage)
-          )
+          products
+            .sort((a, b) => parseFloat(b.product_id) - parseFloat(a.product_id))
+            .slice(offset, offset + perPage)
         );
         break;
       case "priceAsc":

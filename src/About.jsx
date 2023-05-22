@@ -37,7 +37,7 @@ const About = () => {
             <Col xs="0" lg="2" className=""></Col>
           </Row>
           <Row>
-            <Col xs="12" lg="6" className="d-flex align-items-stretch">
+            <Col xs="12" md="12" lg="6" className="d-flex align-items-stretch">
               <Card className="rounded-5 mb-3">
                 <CardBody className="d-flex flex-column">
                   <Container className="px-0">
@@ -58,7 +58,12 @@ const About = () => {
                 </CardBody>
               </Card>
             </Col>
-            <Col xs="12" lg="6" className="d-flex align-items-stretch pb-0">
+            <Col
+              xs="12"
+              md="12"
+              lg="6"
+              className="d-flex align-items-stretch pb-0"
+            >
               <Card className="rounded-5 mb-3 back-yellow-green">
                 <CardBody className="d-flex flex-column pb-0">
                   <Container className="p-0">

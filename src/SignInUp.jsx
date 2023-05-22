@@ -209,7 +209,7 @@ const SignInup = () => {
                           {continueButtonVis ? (
                             <Col xs="12" className="mb-2">
                               <a
-                                href={redirectUrl}
+                                href={redirectUrl ?? "/"}
                                 className="btn button-colour-subtle block border-0 text-black rounded-4 d-flex justify-content-center align-items-center py-3"
                               >
                                 <h5 className="m-0">Continue</h5>

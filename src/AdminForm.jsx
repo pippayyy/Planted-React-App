@@ -486,23 +486,23 @@ const AdminForm = () => {
           dataFieldName: "img",
           defaultThing: { accept: "image/*" },
         },
-        {
-          fieldId: 6,
-          formId: "detail",
-          fieldName: "Product Details",
-          fieldType: "textarea",
-          fieldHintText:
-            "Format: [{'PropertyName': 'Example2', 'Value': 'ExampleValye', 'IconName': 'exampleIcon'}]",
-          fieldReq: false,
-          fieldDisabled: false,
-          submitInForm: true,
-          dataFieldName: "product_details_json",
-          defaultThing: {
-            defaultValue:
-              linkData !== null ? linkData.product_details_json : "",
-            rows: 5,
-          },
-        },
+        // {
+        //   fieldId: 6,
+        //   formId: "detail",
+        //   fieldName: "Product Details",
+        //   fieldType: "textarea",
+        //   fieldHintText:
+        //     "Format: [{'PropertyName': 'Example2', 'Value': 'ExampleValye', 'IconName': 'exampleIcon'}]",
+        //   fieldReq: false,
+        //   fieldDisabled: false,
+        //   submitInForm: true,
+        //   dataFieldName: "product_details_json",
+        //   defaultThing: {
+        //     defaultValue:
+        //       linkData !== null ? linkData.product_details_json : "",
+        //     rows: 5,
+        //   },
+        // },
         {
           fieldId: 7,
           formId: "productQty",
@@ -646,23 +646,23 @@ const AdminForm = () => {
             defaultValue: linkData !== null ? linkData.img : "",
           },
         },
-        {
-          fieldId: 6,
-          formId: "detail",
-          fieldName: "Product Details",
-          fieldType: "textarea",
-          fieldHintText:
-            "Format: [{'PropertyName': 'Example2', 'Value': 'ExampleValye', 'IconName': 'exampleIcon'}]",
-          fieldReq: false,
-          fieldDisabled: false,
-          submitInForm: true,
-          dataFieldName: "product_details_json",
-          defaultThing: {
-            defaultValue:
-              linkData !== null ? linkData.product_details_json : "",
-            rows: 5,
-          },
-        },
+        // {
+        //   fieldId: 6,
+        //   formId: "detail",
+        //   fieldName: "Product Details",
+        //   fieldType: "textarea",
+        //   fieldHintText:
+        //     "Format: [{'PropertyName': 'Example2', 'Value': 'ExampleValye', 'IconName': 'exampleIcon'}]",
+        //   fieldReq: false,
+        //   fieldDisabled: false,
+        //   submitInForm: true,
+        //   dataFieldName: "product_details_json",
+        //   defaultThing: {
+        //     defaultValue:
+        //       linkData !== null ? linkData.product_details_json : "",
+        //     rows: 5,
+        //   },
+        // },
         {
           fieldId: 7,
           formId: "productQty",
@@ -904,7 +904,7 @@ const AdminForm = () => {
                                     {field.fieldName}
                                   </Label>
                                 </FormGroup>
-                                <FormText>{field.fieldHintText}</FormText>
+                                {/* <FormText>{field.fieldHintText}</FormText> */}
                               </Col>
                             ))
                           : null}
