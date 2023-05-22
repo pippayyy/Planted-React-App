@@ -185,7 +185,7 @@ const Detail = () => {
                           <Col xs="3" className=""></Col>
                         </Row>
                         <Row className="my-2">
-                          <Col xs="12" md="6" className="px-0 text-center">
+                          <Col xs="12" lg="6" className="px-0 text-center">
                             <div
                               className={
                                 (product.virtual_stock_reserved !== null
@@ -214,7 +214,7 @@ const Detail = () => {
                               </div>
                             ) : null}
                           </Col>
-                          <Col xs="12" md="6">
+                          <Col xs="12" lg="6">
                             {product.product_details_json != null ? (
                               <Row className="mb-2 mx-1">
                                 {product.product_details_json
@@ -229,7 +229,7 @@ const Detail = () => {
                                         title={detailItem.PropertyName}
                                         descrip={detailItem.Value}
                                         iconName={detailItem.IconName}
-                                        iconClass="fs-1 mx-2 green-text"
+                                        iconClass="fs-3 mx-2 green-text"
                                         cardClass="m-0 px-0 border-0 bg-transparent"
                                         colOne="4"
                                         colTwo="8"
