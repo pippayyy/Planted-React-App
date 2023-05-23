@@ -128,7 +128,6 @@ const Shop = () => {
               value={sortValue}
               onChange={(event) => {
                 setSortValue(event.target.value);
-                console.log("sort value changed to: ", event.target.value);
               }}
             >
               <option value="dateAsc">Recommended</option>

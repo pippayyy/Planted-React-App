@@ -15,7 +15,6 @@ import {
   FormGroup,
   Input,
   Alert,
-  FormText,
 } from "reactstrap";
 import { useQuery } from "@tanstack/react-query";
 import fetchCategoryActive from "./fetchCategoryActive";
@@ -537,7 +536,7 @@ const AdminForm = () => {
           fieldId: 9,
           formId: "discountPerc",
           fieldName: "Discount Percentage",
-          fieldType: "text",
+          fieldType: "number",
           fieldHintText: "",
           fieldReq: true,
           fieldDisabled: false,
@@ -545,8 +544,8 @@ const AdminForm = () => {
           dataFieldName: "discount_percent",
           defaultThing: {
             defaultValue: linkData !== null ? linkData.discount_percent : "",
-            pattern: "[0-9]{1,3}",
-            maxLength: 3,
+            min: "1",
+            max: "100",
           },
         },
       ],
@@ -697,7 +696,7 @@ const AdminForm = () => {
           fieldId: 9,
           formId: "discountPerc",
           fieldName: "Discount Percentage",
-          fieldType: "text",
+          fieldType: "number",
           fieldHintText: "",
           fieldReq: true,
           fieldDisabled: false,
@@ -705,8 +704,8 @@ const AdminForm = () => {
           dataFieldName: "discount_percent",
           defaultThing: {
             defaultValue: linkData !== null ? linkData.discount_percent : "",
-            pattern: "[0-9]{1,3}",
-            maxLength: 3,
+            min: "1",
+            max: "100",
           },
         },
       ],

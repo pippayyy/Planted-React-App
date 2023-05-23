@@ -24,7 +24,6 @@ const Home = () => {
     sessionRefetch();
     favsRefetch();
     refetch();
-    console.log("in use effect");
   });
 
   //Used to get category data and populate category sections

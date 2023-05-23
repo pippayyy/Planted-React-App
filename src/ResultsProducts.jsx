@@ -15,8 +15,6 @@ const ResultsProduct = ({
 }) => {
   const [productsSorted, setProductsSorted] = useState(products);
 
-  console.log("offset ", offset);
-
   useEffect(() => {
     switch (sortProducts) {
       case "dateDesc":
@@ -24,6 +22,14 @@ const ResultsProduct = ({
         setProductsSorted(
           products
             .sort((a, b) => parseFloat(b.product_id) - parseFloat(a.product_id))
+            .slice(offset, offset + perPage)
+        );
+        break;
+      case "dateAsc":
+        //Sort by created date
+        setProductsSorted(
+          products
+            .sort((a, b) => parseFloat(a.product_id) - parseFloat(b.product_id))
             .slice(offset, offset + perPage)
         );
         break;
@@ -48,8 +54,6 @@ const ResultsProduct = ({
         setProductsSorted(products.slice(offset, offset + perPage));
         break;
     }
-    console.log("productsSorted in effect ", productsSorted);
-    console.log("offset in effect ", offset);
   }, [sortProducts, products, offset]);
 
   return (
