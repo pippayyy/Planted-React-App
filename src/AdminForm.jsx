@@ -545,7 +545,7 @@ const AdminForm = () => {
           dataFieldName: "discount_percent",
           defaultThing: {
             defaultValue: linkData !== null ? linkData.discount_percent : "",
-            min: "1",
+            min: "0",
             max: "100",
           },
         },
@@ -705,7 +705,7 @@ const AdminForm = () => {
           dataFieldName: "discount_percent",
           defaultThing: {
             defaultValue: linkData !== null ? linkData.discount_percent : "",
-            min: "1",
+            min: "0",
             max: "100",
           },
         },
