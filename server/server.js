@@ -971,8 +971,7 @@ app.post("/api/order/placeorder", async (req, res) => {
       cc: "pippa.austin@live.co.uk",
       subject: "Order confirmation PLANTED#" + req.body.orderId,
       // text: "That was easy!",
-      html:
-        `<!DOCTYPE html>
+      html: `<!DOCTYPE html>
       <html>
       <head>
       <title></title>
@@ -1075,22 +1074,25 @@ app.post("/api/order/placeorder", async (req, res) => {
                                           <td width="25%" align="left" bgcolor="#eeeeee" style="font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 16px; font-weight: 800; line-height: 24px; padding: 10px;">
                                               PLANTED#${req.body.orderId}
                                           </td>
-                                          </tr>` +
-        OrderDetailsActive.map((item) =>
-          '<tr><td width="75%" align="left" style="font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 16px; font-weight: 400; line-height: 24px; padding: 15px 10px 5px 10px;">' +
-            item.name +
-            "(x" +
-            item.product_qty +
-            ")" +
-            "</td>" +
-            '<td width="25%" align="left" style="font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 16px; font-weight: 400; line-height: 24px; padding: 15px 10px 5px 10px;">' +
-            "£" +
-            item.discount_percent >
-          0
-            ? (item.price * (1 - item.discount_percent * 0.01)).toFixed(2)
-            : item.price + "</td>" + "</tr>"
-        ) +
-        `</table>
+                                      </tr>
+                                      ${OrderDetailsActive.map(
+                                        (item) => `<tr>
+                                      <td width="75%" align="left" style="font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 16px; font-weight: 400; line-height: 24px; padding: 15px 10px 5px 10px;">
+                                          ${item.name} (x${item.product_qty})
+                                      </td>
+                                      <td width="25%" align="left" style="font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 16px; font-weight: 400; line-height: 24px; padding: 15px 10px 5px 10px;">
+                                      £${
+                                        item.discount_percent > 0
+                                          ? (
+                                              item.price *
+                                              (1 - item.discount_percent * 0.01)
+                                            ).toFixed(2)
+                                          : item.price
+                                      }
+                                      </td>
+                                  </tr>`
+                                      )}
+                                  </table>
                               </td>
                           </tr>
                           <tr>
