@@ -23,7 +23,6 @@ const MyAccount = () => {
     })
       .then((response) => response.json())
       .then((response) => {
-        console.log("response:", response.outcome);
         //If logout successful
         if (response.outcome.message == "success") {
           location.reload();

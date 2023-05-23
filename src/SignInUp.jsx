@@ -55,7 +55,6 @@ const SignInup = () => {
     })
       .then((response) => response.json())
       .then((response) => {
-        console.log("signUp response: ", response);
         setAuthOutcome({
           status: response.outcome.status,
           message: response.outcome.message,
@@ -78,28 +77,23 @@ const SignInup = () => {
     })
       .then((response) => response.json())
       .then((response) => {
-        console.log("signIn response: ", response);
         setAuthOutcome({
           status: response.outcome.status,
           message: response.outcome.message,
         });
 
         if (response.outcome.status == "failed") {
+          //Hide Continue button
           setContinueButtonVis(false);
         }
       });
   }
 
-  //Use Navigate to go back to prev section
-  // const navigate = useNavigate();
-
   useEffect(() => {
     //Check if logged in worked, then nav away
     authOutcome.status == "success"
       ? setTimeout(() => {
-          // After 1.5 seconds, navigate away
-          // !redirectFlag ? navigate(-1) : navigate(-2);
-          // navigate("/");
+          // After 1.5 seconds, show continue button
           setContinueButtonVis(true);
         }, 500)
       : null;
@@ -231,7 +225,6 @@ const SignInup = () => {
                               userPhone: formData.get("phone") ?? "",
                               userPassword: formData.get("password") ?? "",
                             };
-                            console.log("userData: ", userData);
                             signUp(userData);
                           }}
                         >

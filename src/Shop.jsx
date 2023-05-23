@@ -73,15 +73,18 @@ const Shop = () => {
   //Get refetch funciton to reload favs
   const favsRefetch = favsResults?.refetch;
 
-  //pagination stuff
+  //Pagination config
   // eslint-disable-next-line no-unused-vars
   const [currentPage, setCurrentPage] = useState(0);
   const [offset, setOffset] = useState(0);
 
+  //Set max items per page
   const PER_PAGE = 12;
 
+  //Calculate number of pages
   const pageCount = Math.ceil(products.length / PER_PAGE);
 
+  //Function to handle changing between pages
   function handlePageClick({ selected: selectedPage }) {
     setCurrentPage(selectedPage);
     setOffset(selectedPage * PER_PAGE);

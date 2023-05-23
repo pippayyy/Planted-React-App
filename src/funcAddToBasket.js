@@ -9,7 +9,6 @@ const addToBasket = function (prodId, refetch) {
   })
     .then((response) => response.json())
     .then((response) => {
-      console.log("addToBasket response.outcome: ", response.outcome);
       //If Active row in orders table for customer
       if (response.outcome.length > 0) {
         //If row for product already exists in order_details, add one to qty

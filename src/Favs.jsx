@@ -36,6 +36,7 @@ const Favs = () => {
   //Manage modal state
   const [showModal, setShowModal] = useState(false);
 
+  //Sub function to handle other functionality needed when adding to basket - including showing modal, deleting from fav and a refetch (basket updated done by funcAddToBasket)
   function addFavToBag(prodId, refetch) {
     setShowModal(true);
     delFav(prodId, refetch);

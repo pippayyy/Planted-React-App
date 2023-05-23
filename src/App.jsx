@@ -30,6 +30,7 @@ import SignInNeeded from "./SignInNeeded";
 import fetchSession from "./fetchSession";
 import fetchSessionAdmin from "./fetchSessionAdmin";
 
+//Set up React Query config options - set to cache without timeout
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
@@ -39,6 +40,7 @@ const queryClient = new QueryClient({
   },
 });
 
+//Protected route - used for routes that require a session to exist (user to be signed in)
 function ProtectedRoute({ component: Component, altpath: Altpath, ...rest }) {
   //Check if session exists
   const { data, status, refetch } = useQuery(["getSession"], fetchSession, {
@@ -50,7 +52,6 @@ function ProtectedRoute({ component: Component, altpath: Altpath, ...rest }) {
   if (status == "loading") {
     null;
   } else {
-    console.log("sessionExist: ", sessionExist);
     if (sessionExist == "success") {
       return <Component {...rest} />;
     } else {
@@ -68,6 +69,7 @@ function ProtectedRoute({ component: Component, altpath: Altpath, ...rest }) {
   }
 }
 
+//Admin route - used for routes that require a session with admin privs to exist (admin user to be signed in)
 function AdminRoute({ component: Component, altpath: Altpath, ...rest }) {
   //Check if session exists
   const { data, status, refetch } = useQuery(
@@ -85,7 +87,6 @@ function AdminRoute({ component: Component, altpath: Altpath, ...rest }) {
   if (status == "loading") {
     null;
   } else {
-    console.log("sessionExistAdmin: ", sessionExistAdmin);
     if (sessionExistAdmin == "success") {
       return <Component {...rest} />;
     } else {

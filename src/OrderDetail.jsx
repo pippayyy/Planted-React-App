@@ -29,13 +29,8 @@ const OrderDetail = () => {
   );
   //Get orders data
   const orderItems = ordersResults?.data?.outcome ?? [];
-  //Get orders refetch to reload orders data
-  //   const ordersRefetch = ordersResults?.refetch;
-  //Get orders fetch status
-  //   const ordersStatus = ordersResults?.status ?? "loading";
 
-  console.log("orderItems: ", orderItems);
-
+  //JSON Dictionary of payment types
   const paymentTypes = [
     {
       paymentTypeId: 1,

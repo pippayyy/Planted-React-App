@@ -37,6 +37,7 @@ const AdminForm = () => {
     message: null,
   });
 
+  //Form dictionary - this is how the form is built dynamically
   const formDict = [
     {
       section: "discountEdit",

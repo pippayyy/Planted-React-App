@@ -1,4 +1,4 @@
-/* Setting custom variables for the application*/
+/* Setting custom variables for the application - theme colours*/
 :root {
   --colour-plant-green: #74A860;
   --colour-subtle-green: #EFF7EB;
@@ -6,43 +6,46 @@
   --colour-sale-red: #C5312D;
 }
 
-/* * {
-  box-sizing: border-box;
-  color: #333;
-} */
-
+/* Add format to html, body */
 html, body {
   margin: 0;
   min-height: 100vh;
 }
 
+/* Set background colour and font */
 body {
   background-color: var(--colour-subtle-green) !important;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
+/* Set navbar background colour */
 .navbar{
   background: var(--colour-plant-green);
 }
 
+/* Set navbar formatting */
 .navbar-header {
   float: left;
   width: auto!important;
 }
 
+/* Button fromatting */
 .btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited {
   background-color: white !important;
 }
 
+/* Nav icon sizing */
 .nav-icons{
   min-width: 150px;
 }
 
+/* Nav icon items formatting */
 .nav-icons-items{
   max-width: 40px !important;
   display: inline-block !important;
 }
 
+/* List formatting */
 ul {
   list-style-type: none;
   margin: 0;
@@ -70,6 +73,7 @@ li a:hover {
   transform: rotate(45deg);
 }
 
+/* Image formatting - custom sizes based on responsivess */
 .img-category{
   width: 80%;
   height: 8vh;
@@ -130,6 +134,7 @@ li a:hover {
 }
 
 
+/* Button formatting */
 .button-colour{
   background-color: var(--colour-yellow-green) !important;
 }
@@ -138,11 +143,12 @@ li a:hover {
   background-color: var(--colour-subtle-green) !important;
 }
 
+/* Set colour of sale price to custom sale red */
 .sale-text{
   color: var(--colour-sale-red);
 }
 
-
+/* Navbar formatting */
 .nav-pills > .active > a,
 .nav-pills .nav-link.active,
 .nav-pills > .active > a:hover,.nav-pills > li > a:hover {
@@ -156,6 +162,7 @@ color: black !important;
 background-color: transparent !important;
 }
 
+/* Used to underline section - categories on shop page */
 .text-underline-green{
   max-width: fit-content;
   border-bottom-width: 4px;
@@ -169,7 +176,7 @@ background-color: transparent !important;
     color: #4B4E52;
 }
 
-
+/* Loader formatting */
 .loader {
   font-size: 35px;
   animation: spin 1s linear infinite;
@@ -208,7 +215,6 @@ background-color: transparent !important;
   min-height: calc(100vh - 120px);
 }
 
-
 .category-button{
   color: black;
   text-decoration: none;
@@ -227,6 +233,7 @@ width:max-content !important;
   flex-wrap: nowrap !important;
 }
 
+/* Heart icon formatting - on hover effects */
 .heart-icon:hover path {
   fill:#74A860;
   color:#74A860;
@@ -236,6 +243,7 @@ width:max-content !important;
   fill:#74A860;
 }
 
+/* Seearch icon formatting */
 .search-input-style{
   border-radius: 25px 0 0 25px !important;
 }
@@ -245,7 +253,7 @@ width:max-content !important;
   background-color: white !important;
 }
 
-
+/* Overlay formatting - used on Out Of Stock products */
 .overlay {
   position: fixed;
   display: none;
@@ -298,6 +306,7 @@ width:max-content !important;
   pointer-events: none;
 }
 
+/* Form feedback formatting */
 .valid-feedback{
   display:block !important;
 }
@@ -306,10 +315,12 @@ width:max-content !important;
   display:block !important;
 }
 
+/* Custom colour */
 .back-yellow-green{
   background-color: var(--colour-yellow-green) !important;
 }
 
+/* Pagination formatting */
 .pagination {
   display: flex;
   list-style: none;
@@ -341,16 +352,7 @@ width:max-content !important;
   border: 1px solid rgb(198, 197, 202);
 }
 
-
-/*  PART OF OLD PROJECT - DELETE/CHECK */
-
-
-#modal a {
-  display: inline-block;
-  margin-right: 15px;
-  text-decoration: none;
-}
-
+/* Modal formatting */
 #modal {
   background-color: rgba(0, 0, 0, 0.5);
   position: fixed;
@@ -362,6 +364,12 @@ width:max-content !important;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+#modal a {
+  display: inline-block;
+  margin-right: 15px;
+  text-decoration: none;
 }
 
 #modal:empty {

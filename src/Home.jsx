@@ -19,7 +19,7 @@ const Home = () => {
   const sessionExist = sessionResults?.data?.outcome?.message ?? [];
   const sessionRefetch = sessionResults?.refetch;
 
-  //Refetch session on page load to ensure correct session status is set
+  //Refetch on page load
   useEffect(() => {
     sessionRefetch();
     favsRefetch();
