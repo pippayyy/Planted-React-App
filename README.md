@@ -1,3 +1,2 @@
-# Planted-React-App-Postgres
-
-Postgres version of Planted application
+# Planted-React-App
+Latest version of Planted application
